@@ -9,18 +9,20 @@ public class ArrayListToArrays {
 
         List<Integer> integerList = new ArrayList<>();
         integerList.add(2);
+        integerList.add(5);
 
         int[] leaders = arrayListToArray(integerList);
         System.out.println(Arrays.toString(leaders));
     }
 
     private static int[] arrayListToArray(List<Integer> integerList) {
-        int[] leaders = new int[integerList.size()];
+        return integerList.stream().mapToInt(Integer::intValue).toArray();
+        /*int[] leaders = new int[integerList.size()];
         int index = 0;
         for (Integer i : integerList) {
             leaders[index] = i;
             i++;
         }
-        return leaders;
+        return leaders;*/
     }
 }
