@@ -38,6 +38,16 @@ public class SlidingWindowSpiral {
         if (N == 1) {
             mat[i][j] = num++;
         }
+        printMatrix(mat);
         return mat;
+    }
+
+    public static void printMatrix(int[][] mat) {
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[i].length; j++) {
+                System.out.printf("%4d ", mat[i][j]);
+            }
+            System.out.println();
+        }
     }
 }
