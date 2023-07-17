@@ -47,7 +47,7 @@ public class SlidingWindowSpiral {
             for (int j = 0; j < mat[i].length; j++) {
                 System.out.printf("%4d ", mat[i][j]);
             }
-            System.out.println();
+            System.out.println("\n");
         }
     }
 }
