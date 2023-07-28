@@ -18,7 +18,15 @@ public class MakeLargestNumberFromArrayOfNaturalNumbers {
         A.add(9);*/
         A.add(8);
         A.add(89);
-        System.out.println("largestNumber(A) = " + largestNumber(A));
+//        System.out.println("largestNumber(A) = " + largestNumber(A));
+        System.out.println("\"12\".compareTo(\"121\") = " + "12".compareTo("121"));
+
+        System.out.println("\"11\".compareTo(\"116\") = " + "11".compareTo("116"));
+        //Move after shorter number. Continue to check with the elements of the shorter number
+        //If higher, the longer number should come first. Else, shorter one should come first
+        System.out.println("\"30\".compareTo(\"34\") = " + "30".compareTo("34"));
+        System.out.println("\"1\".compareTo(\"2\") = " + "1".compareTo("2"));
+
     }
 
     public static String largestNumber(final List<Integer> A) {
@@ -48,3 +56,9 @@ public class MakeLargestNumberFromArrayOfNaturalNumbers {
         return largestNumber.toString();
     }
 }
+
+/**
+ * 121, 12 -> 12 121
+ * 1, 116 -> 116 1
+ * 1, 11 -> 11 1
+ */
