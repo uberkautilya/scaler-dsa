@@ -37,7 +37,7 @@ public class MakeLargestNumberFromArrayOfNaturalNumbers {
         ));
 
         integers = new ArrayList<>(List.of(
-                931,94,209,448,716,903,124,372,462,196,715,802,103,740,389,872,615,638,771,829,899,999,29,163,342,902,922,312,326,817,288,75,37,286,708,589,975,747,743,699,743,954,523,989,114,402,236,855,323,79,949,176,663,587,322
+                931, 94, 209, 448, 716, 903, 124, 372, 462, 196, 715, 802, 103, 740, 389, 872, 615, 638, 771, 829, 899, 999, 29, 163, 342, 902, 922, 312, 326, 817, 288, 75, 37, 286, 708, 589, 975, 747, 743, 699, 743, 954, 523, 989, 114, 402, 236, 855, 323, 79, 949, 176, 663, 587, 322
         ));
         integers = new ArrayList<>(List.of(
                 94, 949
@@ -63,52 +63,15 @@ public class MakeLargestNumberFromArrayOfNaturalNumbers {
         }
 
         stringA.sort((String a, String b) -> {
-            int smallerLength = a.length() < b.length() ? a.length() : b.length();
-            boolean isExt = true;
-            for (int i = 0; i < smallerLength; i++) {
-                if (a.charAt(i) != b.charAt(i)) {
-                    isExt = false;
-                    break;
-                }
-            }
-            if (isExt) {
-                if (a.length() < b.length()) {
-                    int index = 0;
-                    for (int i = a.length(); i < b.length(); i++) {
-                        if (b.charAt(i) > a.charAt(index)) {
-                            return 1;
-                        } else if (b.charAt(i) < a.charAt(index)) {
-                            return -1;
-                        } else if (b.charAt(i) == a.charAt(index) && (i + 1) == b.length()) {
-                            return 1;
-                        }
-                        index++;
-                        if (index >= a.length() - 1) {
-                            index = 0;
-                        }
-                    }
-
-                } else if (b.length() < a.length()) {
-                    int index = 0;
-                    for (int i = b.length(); i < a.length(); i++) {
-                        if (a.charAt(i) > b.charAt(index)) {
-                            return -1;
-                        } else if (a.charAt(i) < b.charAt(index)) {
-                            return 1;
-                        } else if (a.charAt(i) == b.charAt(index) && (i + 1) == a.length()) {
-                            return -1;
-                        }
-                        index++;
-                        if (index >= b.length() - 1) {
-                            index = 0;
-                        }
-                    }
-
-                }
+            String alternate1 = a + b;
+            String alternate2 = b + a;
+            if (alternate1.compareTo(alternate2) > 0) {
+                return -1;
+            } else if (alternate1.compareTo(alternate2) < 0) {
+                return 1;
+            } else {
                 return 0;
             }
-            //Largest numbers first
-            return b.compareTo(a);
         });
         System.out.println("stringA = " + stringA);
         if (stringA.get(0).equals("0")) {
@@ -116,8 +79,8 @@ public class MakeLargestNumberFromArrayOfNaturalNumbers {
         }
 
         StringBuilder largestNumber = new StringBuilder();
-        for (int i = 0; i < stringA.size(); i++) {
-            largestNumber.append(stringA.get(i));
+        for (String s : stringA) {
+            largestNumber.append(s);
         }
 
         return largestNumber.toString();
