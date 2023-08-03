@@ -14,15 +14,18 @@ public class SortIntegerArray {
     }
 
     public int[] solve(int[] A) {
-        List<Integer> intList = new ArrayList<>();
+        int[] freqArray = new int[100_001];
+
         for (int a : A) {
-            intList.add(a);
+            freqArray[a] = freqArray[a] + 1;
         }
-        intList.sort(Integer::compareTo);
-        int[] newArray = new int[A.length];
-        for (int i = 0; i < intList.size(); i++) {
-            newArray[i] = intList.get(i);
+        int count = 0;
+        for (int i = 1; i < freqArray.length; i++) {
+            while (freqArray[i] > 0) {
+                A[count++] = i;
+                freqArray[i]--;
+            }
         }
-        return newArray;
+        return A;
     }
 }
