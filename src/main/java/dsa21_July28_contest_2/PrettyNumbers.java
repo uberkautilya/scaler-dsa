@@ -1,11 +1,12 @@
 package dsa21_July28_contest_2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PrettyNumbers {
     public static void main(String[] args) {
-        ArrayList<Integer> arrayList = new ArrayList<>(List.of(17, 4, 12, 10, 5));
+        ArrayList<Integer> arrayList = new ArrayList<>(Arrays.asList(17, 4, 12, 10, 5));
         System.out.println("solve(arrayList) = " + solve(arrayList));
     }
 

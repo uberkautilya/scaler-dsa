@@ -1,11 +1,12 @@
 package dsa19_july24;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class IntegersSortTensPlace {
     public static void main(String[] args) {
-        ArrayList<Integer> A = new ArrayList<>(List.of(
+        ArrayList<Integer> A = new ArrayList<>(Arrays.asList(
                 19, 7, 11, 15
         ));
 

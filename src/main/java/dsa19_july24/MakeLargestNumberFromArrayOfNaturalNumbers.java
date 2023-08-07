@@ -1,6 +1,7 @@
 package dsa19_july24;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ public class MakeLargestNumberFromArrayOfNaturalNumbers {
 
 
         arrayListOfIntegers = new ArrayList<>(
-                List.of(
+                Arrays.asList(
                         170, 480, 735, 896, 634, 844, 1, 610, 446, 591, 935, 802, 383, 8, 443, 247,
                         124, 461, 317, 457, 48, 886, 420, 473, 973, 464, 203, 288, 785, 703, 935, 7, 987, 48,
                         692, 633, 597, 857, 139, 733, 692, 68, 434, 587, 489, 517, 305, 432, 577, 335, 586,
@@ -29,17 +30,17 @@ public class MakeLargestNumberFromArrayOfNaturalNumbers {
                         116, 404, 268, 364, 351, 866, 824, 947, 960, 91, 691, 492, 312, 609, 915, 579, 476, 248, 192
                 ));
 
-        ArrayList<Integer> integers = new ArrayList<>(List.of(
+        ArrayList<Integer> integers = new ArrayList<>(Arrays.asList(
                 170, 480, 735, 896, 634, 844, 1, 610, 446, 591, 935, 802, 383, 8, 443, 247, 124, 461, 317, 457, 48, 886, 420, 473,
                 973, 464, 203, 288, 785, 703, 935, 7, 987, 48, 692, 633, 597, 857, 139, 733, 692, 68, 434, 587, 489, 517, 305, 432,
                 577, 335, 586, 34, 659, 491, 310, 857, 256, 856, 257, 877, 209, 979, 653, 646, 2, 65, 858, 779, 372, 116, 404, 268,
                 364, 351, 866, 824, 947, 960, 91, 691, 492, 312, 609, 915, 579, 476, 248, 192
         ));
 
-        integers = new ArrayList<>(List.of(
+        integers = new ArrayList<>(Arrays.asList(
                 931, 94, 209, 448, 716, 903, 124, 372, 462, 196, 715, 802, 103, 740, 389, 872, 615, 638, 771, 829, 899, 999, 29, 163, 342, 902, 922, 312, 326, 817, 288, 75, 37, 286, 708, 589, 975, 747, 743, 699, 743, 954, 523, 989, 114, 402, 236, 855, 323, 79, 949, 176, 663, 587, 322
         ));
-        integers = new ArrayList<>(List.of(
+        integers = new ArrayList<>(Arrays.asList(
                 94, 949
         ));
 
