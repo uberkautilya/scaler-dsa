@@ -1,6 +1,7 @@
 package dsa27_aug09;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * On the first row, we write a 0. Now in every subsequent row, we look at the previous row and replace each occurrence of 0 with 01, and each occurrence of 1 with 10.
@@ -14,6 +15,7 @@ public class KthElementLarge {
 
     /**
      * Not the right approach. Bisect the array and merge after processing - try this
+     *
      * @param args
      */
     public static void main(String[] args) {
@@ -22,42 +24,40 @@ public class KthElementLarge {
         System.out.println("result = " + result);
     }
 
+    /*
+    0
+    01
+    01 10
+    01 10 10 01
+    01 10 10 01 10 01 01 10
+    01 10 10 01 10 01 01 10 | 10 01 01 10 01 10 10 01
+    */
     public int solve(int A, long B) {
-        /*
-        0
-        01
-        01 10
-        01 10 10 01
-        01 10 10 01 10 01 01 10
-        */
-        if (A == 1 && B == 0L) return 0;
-        ArrayList<Integer> list = new ArrayList<Integer>() {
-            {
-                add(0);
-            }
-        };
-        return recurse(list, A - 1, B);
-
+        if (A == 1 && B == 1) return 0;
+        ArrayList<Integer> seedList = new ArrayList<>();
+        seedList.add(0);
+        seedList.add(1);
+        if (A == 2) return seedList.get((int) B);
+        return findElement(seedList, 1, A, B);
     }
 
-    public Integer recurse(ArrayList<Integer> list, Integer row, Long index) {
-
-        long count = -1L;
-
-        ArrayList<Integer> newList = new ArrayList<>();
-        for (Integer val : list) {
-            if (val == 0) {
-                newList.add(0);
-                if (index.equals(++count)) return 0;
-                newList.add(1);
-                if (index.equals(++count)) return 1;
-            } else {
-                newList.add(1);
-                if (index.equals(++count)) return 1;
-                newList.add(0);
-                if (index.equals(++count)) return 0;
+    public Integer findElement(ArrayList<Integer> list, Integer row, Integer rowLimit, long B) {
+        long countRemaining = B - list.size();
+        for (int r = row; r < rowLimit; r++) {
+            //Bisect the array and add second half first.
+            List<Integer> firstHalf = list.subList(0, list.size() / 2);
+            List<Integer> secondHalf = list.subList(list.size() / 2, list.size());
+            list.addAll(secondHalf);
+            countRemaining -= secondHalf.size();
+            if (countRemaining <= 0) {
+                return secondHalf.get((int) countRemaining);
+            }
+            list.addAll(firstHalf);
+            countRemaining -= firstHalf.size();
+            if (countRemaining <= 0) {
+                return firstHalf.get((int) countRemaining);
             }
         }
-        return recurse(newList, row - 1, index);
+        return 0;
     }
 }
