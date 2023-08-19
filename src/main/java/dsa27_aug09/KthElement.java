@@ -14,11 +14,13 @@ public class KthElement {
 
     public int solve(int A, int B) {
         /*
-        0
-        01
-        01 10
-        01 10 10 01
+        0                   0: 0     A, B -> A-1, B/2
+        01                  1:-0 = 1, since index odd
+        01 10               2: = 1
+        01 10 10 01         4: = 1
         01 10 10 01 10 01 01 10
+        5,5(odd) -> 4,2(even) -> 3,1(odd) -> 2,0(even)
+        1-1(comp)<- 1(same)   <- 1-0(comp)  <- 0(same)
         */
         if (A == 1 && B == 0) return 0;
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(0));

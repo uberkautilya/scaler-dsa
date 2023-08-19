@@ -42,3 +42,9 @@ public class LongestPalindrome {
         return string.substring(left, right);
     }
 }
+
+
+/*
+foo(3, 5) -> bar(3, foo(3, 4)) -> bar(3, bar(3, foo(3,3)) -> bar(3, }3, foo(3, 2) -> bar3*4 foo(3,1) -> bar3*5 foo(3, 0) -> bar3*5 1
+3*3*3*3*3 = 81*3 = 243
+ */
