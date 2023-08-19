@@ -19,17 +19,6 @@ public class KthElementLarge {
         System.out.println("result = " + result);
     }
 
-    /*
-    0
-    01
-    01 10
-    01 10 10 01
-    01 10 10 01 10 01 01 10
-    01 10 10 01 10 01 01 10 | 10 01 01 10 01 10 10 01
-
-    5,5(odd) -> 4,2(even) -> 3,1(odd) -> 2,0(even)
-    1-1(comp)<- 1(same)   <- 1-0(comp)  <- 0(same)
-    */
 
     public Integer elementAtIndex(Integer row, Long index) {
 
@@ -48,3 +37,17 @@ public class KthElementLarge {
         else return 1 - elementAtIndex(--row, index / 2);  //Index being even, complement of parent element's value
     }
 }
+
+    /*
+    Explanation:
+
+    0
+    01
+    01 10
+    01 10 10 01
+    01 10 10 01 10 01 01 10
+    01 10 10 01 10 01 01 10 | 10 01 01 10 01 10 10 01
+
+    5,5(odd) -> 4,2(even) -> 3,1(odd) -> 2,0(even)
+    1-1(comp)<- 1(same)   <- 1-0(comp)  <- 0(same)
+    */
