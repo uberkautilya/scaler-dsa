@@ -23,10 +23,10 @@ public class Matrix {
         int rCount = 0;
         int cCount = 0;
 
-        while (rCount < rowCount || cCount < columnCount) {
+        while (rCount < rowCount) {
             int num = sc.nextInt();
             matrix[rCount][cCount++] = num;
-            if(cCount == columnCount && rCount != rowCount - 1){
+            if(cCount == columnCount){
                 cCount = 0;
                 rCount++;
             }
@@ -35,10 +35,9 @@ public class Matrix {
 
     Matrix add(Matrix x) {
         // Complete the function
-        int[][] sumArray = x.matrix;
         for (int r = 0; r < rowCount; r++) {
             for (int c = 0; c < columnCount; c++) {
-                sumArray[r][c] = matrix[r][c] + sumArray[r][c];
+                x.matrix[r][c] = matrix[r][c] + x.matrix[r][c];
             }
         }
         return x;
@@ -46,10 +45,9 @@ public class Matrix {
 
     Matrix subtract(Matrix x) {
         // Complete the function
-        int[][] diffArray = x.matrix;
         for (int r = 0; r < rowCount; r++) {
             for (int c = 0; c < columnCount; c++) {
-                diffArray[r][c] = matrix[r][c] - diffArray[r][c];
+                x.matrix[r][c] = matrix[r][c] - x.matrix[r][c];
             }
         }
         return x;
@@ -60,7 +58,7 @@ public class Matrix {
         Matrix transpose = new Matrix(columnCount, rowCount);
         for (int i = 0; i < rowCount; i++) {
             for (int j = 0; j < columnCount; j++) {
-                transpose.matrix[i][j] = matrix[j][i];
+                transpose.matrix[j][i] = matrix[i][j];
             }
         }
         return transpose;
