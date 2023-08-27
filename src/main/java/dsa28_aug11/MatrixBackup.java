@@ -2,7 +2,7 @@ package dsa28_aug11;
 
 import java.util.Scanner;
 
-public class Matrix {
+public class MatrixBackup {
     // Define properties here
     int rowCount;
     int columnCount;
@@ -10,7 +10,7 @@ public class Matrix {
 
 
     // Define constructor here
-    public Matrix(int r, int c) {
+    public MatrixBackup(int r, int c) {
         this.rowCount = r;
         this.columnCount = c;
         this.matrix = new int[rowCount][columnCount];
@@ -21,19 +21,18 @@ public class Matrix {
         // Use the Scanner object passed as argument for taking input and not a new Scanner object
         // Complete the function
         int rCount = 0;
-        int cCount = 0;
-
-        while (rCount < rowCount || cCount < columnCount) {
-            int num = sc.nextInt();
-            matrix[rCount][cCount++] = num;
-            if(cCount == columnCount && rCount != rowCount - 1){
-                cCount = 0;
-                rCount++;
+        while (rCount++ < rowCount) {
+            String row = sc.nextLine();
+            String[] numArray = row.split(" ");
+            int cCount = 0;
+            for (String num : numArray) {
+                matrix[rCount][cCount] = Integer.parseInt(num);
+                cCount++;
             }
         }
     }
 
-    Matrix add(Matrix x) {
+    MatrixBackup add(MatrixBackup x) {
         // Complete the function
         int[][] sumArray = x.matrix;
         for (int r = 0; r < rowCount; r++) {
@@ -44,7 +43,7 @@ public class Matrix {
         return x;
     }
 
-    Matrix subtract(Matrix x) {
+    MatrixBackup subtract(MatrixBackup x) {
         // Complete the function
         int[][] diffArray = x.matrix;
         for (int r = 0; r < rowCount; r++) {
@@ -55,15 +54,16 @@ public class Matrix {
         return x;
     }
 
-    Matrix transpose() {
+    MatrixBackup transpose() {
         // Complete the function
-        Matrix transpose = new Matrix(columnCount, rowCount);
         for (int i = 0; i < rowCount; i++) {
-            for (int j = 0; j < columnCount; j++) {
-                transpose.matrix[i][j] = matrix[j][i];
+            for (int j = i; j < columnCount; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
             }
         }
-        return transpose;
+        return this;
     }
 
     void print() {
