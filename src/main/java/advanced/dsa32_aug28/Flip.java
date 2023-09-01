@@ -1,22 +1,46 @@
 package advanced.dsa32_aug28;
 
+import java.util.Arrays;
+
 public class Flip {
     public static void main(String[] args) {
         Flip flip = new Flip();
-        flip.flip()
+        int[] indexArray = flip.flip("001010");
+        System.out.println(Arrays.toString(indexArray));
     }
+
     public int[] flip(String A) {
-        boolean all1s = true;
+        boolean areAllOnes = true;
         for (char c : A.toCharArray()) {
             if (c == '0') {
-                all1s = false;
+                areAllOnes = false;
                 break;
             }
         }
-        if (all1s) return new int[0];
+        if (areAllOnes) return new int[0];
 
-        int[] indices = new int[2];
-        //Todo: Solve the problem
-        return indices;
+        int left = 0;
+        int right = 0;
+        int zero = 0;
+        int maxZeros = 0;
+        for (int i = 0; i < A.length(); i++) {
+            char c = A.charAt(i);
+            if (c == '0') {
+                zero++;
+                if (zero > maxZeros) {
+                    maxZeros = zero;
+                    right = i;
+                }
+            } else {
+                zero--;
+            }
+            if (zero < 0) {
+                zero = 0;
+                left = i;
+                right = i;
+            }
+        }
+        //L and R start from 1, as per the question. Correcting the indexing
+        return new int[]{left + 1, right + 1};
     }
 }
