@@ -21,10 +21,11 @@ public class NextPermutation {
 
     public ArrayList<Integer> nextPermutation(ArrayList<Integer> A) {
         //734521313 -> Start from the rightmost element. The first element less than it should be swapped
-        for (int i = A.size() - 1; i > 0; i--) {
-            for (int j = i - 1; j >= 0; j--) {
-                if (A.get(j) < A.get(i)) {
-                    swap(A, i, j);
+        for (int j = 1; j < A.size() - 1; j++) {
+
+            for (int i = A.size() - 1; i > 0 && i - j >= 0; i--) {
+                if (A.get(i - j).toString().compareTo(A.get(i).toString()) < 0) {
+                    swap(A, i - j, i);
                     return A;
                 }
             }
