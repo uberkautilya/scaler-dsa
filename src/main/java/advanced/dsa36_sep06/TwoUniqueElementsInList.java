@@ -18,6 +18,7 @@ public class TwoUniqueElementsInList {
         }
         int indexBitSet = Integer.MIN_VALUE;
         for (int i = 0; i < 32; i++) {
+            //Find the LSB which is set in the XOR result
             if ((xor & 1 << i) != 0) {
                 indexBitSet = i;
                 break;
