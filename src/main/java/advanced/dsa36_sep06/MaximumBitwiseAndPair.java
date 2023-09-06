@@ -17,6 +17,7 @@ public class MaximumBitwiseAndPair {
         int ans = 0;
         for (int i = 31; i >= 0; i--) {
             int count = countElementsIthBitSet(numbers, i);
+            //If count of elements with ith bit set is <2, can't remove any from list of contenders
             if (count >= 2) {
                 int ithBit = (1 << i);
                 ans = ans + (1 << i);
