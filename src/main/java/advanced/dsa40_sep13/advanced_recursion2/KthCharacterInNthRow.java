@@ -1,4 +1,4 @@
-package advanced.dsa37_sep11.advanced_recursion2;
+package advanced.dsa40_sep13.advanced_recursion2;
 
 public class KthCharacterInNthRow {
     public static void main(String[] args) {

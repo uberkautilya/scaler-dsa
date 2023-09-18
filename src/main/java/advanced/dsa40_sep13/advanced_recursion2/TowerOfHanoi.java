@@ -1,4 +1,4 @@
-package advanced.dsa37_sep11.advanced_recursion2;
+package advanced.dsa40_sep13.advanced_recursion2;
 
 /**
  * 3 towers, N discs on them, smaller ones stacked on larger ones. Move them across to the 3rd post

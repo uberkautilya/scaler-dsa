@@ -38,6 +38,10 @@ public class NextPermutation {
         list.set(index1, list.get(index2));
         list.set(index2, temp);
     }
+
+    void sort(ArrayList<Integer> list, int startIndex, int endIndex) {
+
+    }
 }
 
 /*
