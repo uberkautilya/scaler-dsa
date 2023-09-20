@@ -8,6 +8,7 @@ public class MaximizeGCDByRemovingOneElement {
 
     private static int deleteOneElement(int[] elements) {
         int length = elements.length;
+        if (length == 2) return max(elements[0], elements[1]);
         //Find prefix GCD of the array, both left and right(suffix GCD)
         //create pf gcd
         int[] pfGcd = generatePrefixGcd(elements);
@@ -17,7 +18,7 @@ public class MaximizeGCDByRemovingOneElement {
         //Start with max of gcd when the either first or last element in the array is removed
         int result = max(sfGcd[0], pfGcd[length - 2]);
 
-        for (int i = 1; i < length - 2; i++) {
+        for (int i = 1; i < length - 1; i++) {
             int left = pfGcd[i - 1];
             int right = sfGcd[i + 1];
             int gcd = calculateGcd(left, right);
