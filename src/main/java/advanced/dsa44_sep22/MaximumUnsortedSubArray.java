@@ -16,9 +16,9 @@ public class MaximumUnsortedSubArray {
         if (A.size() == 1) {
             return new ArrayList<>(Collections.singletonList(-1));
         }
-        //From right maintain the lIndex of the smallest element, from left maintain the lIndex of the largest element
-        int lIndex = 0;
-        int hIndex = A.size() - 1;
+        //From right maintain the startIndex of the smallest element, from left maintain the startIndex of the largest element
+        int startIndex = 0;
+        int endIndex = A.size() - 1;
 
         int i = 1;
         Integer minVal = Integer.MAX_VALUE;
@@ -28,10 +28,7 @@ public class MaximumUnsortedSubArray {
             Integer previous = A.get(i - 1);
             if (current < previous) {
                 isSorted = false;
-                if (current < minVal) {
-                    minVal = current;
-                    lIndex = i;
-                }
+                minVal = current < minVal ? current : minVal;
             }
             i++;
         }
@@ -44,13 +41,24 @@ public class MaximumUnsortedSubArray {
             Integer current = A.get(j);
             Integer previous = A.get(j + 1);
             if (current > previous) {
-                if (current > maxVal) {
-                    maxVal = current;
-                    hIndex = i;
-                }
+                maxVal = current > maxVal ? current : maxVal;
             }
             j--;
         }
-        return new ArrayList<>(Arrays.asList(lIndex, hIndex));
+        while (startIndex < A.size()) {
+            if (A.get(startIndex) <= minVal) {
+                startIndex++;
+            } else {
+                break;
+            }
+        }
+        while (endIndex >= 0) {
+            if (A.get(endIndex) >= maxVal) {
+                endIndex--;
+            } else {
+                break;
+            }
+        }
+        return new ArrayList<>(Arrays.asList(startIndex, endIndex));
     }
 }
