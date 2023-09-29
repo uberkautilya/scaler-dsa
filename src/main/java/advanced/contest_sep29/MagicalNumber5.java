@@ -17,6 +17,7 @@ public class MagicalNumber5 {
         int num = A.get(0);
 
         for (int current: A) {
+            //The below step cannot be done - Left Shift can create wrong values
             num = (num << 1) + current;
             result.add(num % 5 == 0 ? 1 : 0);
         }
