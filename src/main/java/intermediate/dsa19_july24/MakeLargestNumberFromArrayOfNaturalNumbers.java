@@ -43,6 +43,9 @@ public class MakeLargestNumberFromArrayOfNaturalNumbers {
         integers = new ArrayList<>(Arrays.asList(
                 94, 949
         ));
+        integers = new ArrayList<>(Arrays.asList(
+                3, 30, 34, 5, 9
+        ));
 
 
         System.out.println("largestNumber(arrayListOfIntegers) = " + largestNumber(integers));

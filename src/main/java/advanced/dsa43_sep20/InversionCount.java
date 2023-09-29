@@ -11,55 +11,55 @@ public class InversionCount {
         System.out.println("inversionPairCount = " + inversionPairCount);
     }
 
-    static int c = 0;
+    static int count = 0;
 
     private static int inversionCount(int[] ar) {
         mergeSort(ar, 0, ar.length - 1);
-        return c % 1000_000_007;
+        return count % 1000_000_007;
     }
 
-    private static void mergeSort(int[] ar, int l, int h) {
-        if (l == h) {
+    private static void mergeSort(int[] ar, int low, int high) {
+        if (low == high) {
             return;
         }
-        int m = (l + h) / 2;
-        mergeSort(ar, l, m);
-        mergeSort(ar, m + 1, h);
+        int mid = (low + high) / 2;
+        mergeSort(ar, low, mid);
+        mergeSort(ar, mid + 1, high);
 
-        merge(ar, l, m, h);
+        merge(ar, low, mid, high);
     }
 
-    private static void merge(int[] ar, int l, int m, int h) {
-        int[] tmp = new int[h - l + 1];
-        int p1 = l;
-        int p2 = m + 1;
+    private static void merge(int[] ar, int low, int mid, int high) {
+        int[] tmp = new int[high - low + 1];
+        int p1 = low;
+        int p2 = mid + 1;
         int p = 0;
 
-        while (p1 <= m && p2 <= h) {
+        while (p1 <= mid && p2 <= high) {
             if (ar[p1] < ar[p2]) {
                 tmp[p] = ar[p1];
                 p1++;
             } else {
-                //Add the number of elements in 1st half from p1 to m
-                c += m - p1 + 1;
-                c = c % 1000_000_007;
+                //Add the number of elements in 1st half from p1 to mid
+                count += mid - p1 + 1;
+                count = count % 1000_000_007;
                 tmp[p] = ar[p2];
                 p2++;
             }
             p++;
         }
-        while (p1 <= m) {
+        while (p1 <= mid) {
             tmp[p] = ar[p1];
             p1++;
             p++;
         }
-        while (p2 <= h) {
+        while (p2 <= high) {
             tmp[p] = ar[p2];
             p2++;
             p++;
         }
-        for (int i = l; i <= h; i++) {
-            ar[i] = tmp[i - l];
+        for (int i = low; i <= high; i++) {
+            ar[i] = tmp[i - low];
         }
     }
 }
