@@ -26,6 +26,7 @@ public class NextPermutation {
             for (int i = A.size() - 1; i > 0 && i - j >= 0; i--) {
                 if (A.get(i - j).toString().compareTo(A.get(i).toString()) < 0) {
                     swap(A, i - j, i);
+                    sort(A, i - j + 1, A.size() - 1);
                     return A;
                 }
             }
@@ -40,7 +41,7 @@ public class NextPermutation {
     }
 
     void sort(ArrayList<Integer> list, int startIndex, int endIndex) {
-
+//        l
     }
 }
 
