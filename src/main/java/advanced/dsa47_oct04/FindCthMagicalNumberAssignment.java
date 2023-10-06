@@ -1,30 +1,30 @@
 package advanced.dsa47_oct04;
 
-public class FindCthMagicalNumber {
+public class FindCthMagicalNumberAssignment {
     public static void main(String[] args) {
-        int cThMagicalNumber = new FindCthMagicalNumber().magicalNumber(19, 11, 13);
+        int cThMagicalNumber = new FindCthMagicalNumberAssignment().magicalNumber(807414236, 3788, 38141); //Expected: 238134151
         System.out.println("cThMagicalNumber = " + cThMagicalNumber);
     }
 
-    private int magicalNumber(Integer a, Integer b, Integer count) {
-        int lcm = lcm(a, b);
-        //Range is 1 to Minimum(a, b) * count
-        int low = 1;
-        int high = minimum(a, b) * count;
+    private int magicalNumber(Integer A, Integer B, Integer C) {
+        int lcm = lcm(B, C);
+        //Range is 1 to Minimum(B, C) * A
+        long low = 1;
+        long high = ((long) minimum(B, C) * A);
         int ans = 0;
 
         while (low <= high) {
-            int midValue = (low + high) / 2;
+            long midValue = (low + high) / 2;
             //Count of elements from 1 to midValue
-            int cnt = (midValue / a) + (midValue / b) - (midValue / lcm);
-            if (cnt == count) {
-                //We need to find the minimum value at which this count is met
-                ans = midValue;
+            long cnt = (((midValue / B) + (midValue / C) - (midValue / lcm)));
+            if (cnt == A) {
+                //We need to find the minimum value at which this A is met
+                ans = (int)(midValue % 1000_000_007);
                 high = midValue - 1;
-            } else if (cnt < count) {
+            } else if (cnt < A) {
                 low = midValue + 1;
             } else {
-                //count > cnt
+                //A > cnt
                 high = midValue - 1;
             }
         }

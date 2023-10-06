@@ -6,30 +6,30 @@ public class SearchRotatedSortedArray {
 
 
     private int search(ArrayList<Integer> list, int needle) {
-        int n = list.size();
-        int l = 0;
-        int h = n - 1;
+        int size = list.size();
+        int low = 0;
+        int high = size - 1;
 
-        while (l <= h) {
-            int m = (l + h) / 2;
-            if (list.get(m) == needle) {
-                return m;
+        while (low <= high) {
+            int midValue = (low + high) / 2;
+            if (list.get(midValue) == needle) {
+                return midValue;
             }
-            if (list.get(l) <= list.get(m)) {
-                //Implies l to m is sorted
-                if (list.get(l) <= needle && needle <= list.get(m)) {
+            if (list.get(low) <= list.get(midValue)) {
+                //Implies low to midValue is sorted
+                if (list.get(low) <= needle && needle <= list.get(midValue)) {
                     //This shows the left part is sorted and needle lies in this range
-                    h = m - 1;
+                    high = midValue - 1;
                 } else {
                     //This shows the right part is sorted
-                    l = m + 1;
+                    low = midValue + 1;
                 }
             } else {
-                //Implies m to h is sorted
-                if (list.get(m) <= needle && needle <= list.get(h)) {
-                    l = m + 1;
+                //Implies midValue to high is sorted
+                if (list.get(midValue) <= needle && needle <= list.get(high)) {
+                    low = midValue + 1;
                 } else {
-                    h = m - 1;
+                    high = midValue - 1;
                 }
             }
         }
