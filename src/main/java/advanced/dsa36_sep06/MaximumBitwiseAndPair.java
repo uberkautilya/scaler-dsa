@@ -6,6 +6,7 @@ import java.util.List;
 public class MaximumBitwiseAndPair {
     public static void main(String[] args) {
         List<Integer> numbers = Arrays.asList(26, 13, 23, 28, 27, 7, 25);
+        numbers = Arrays.asList(13,18,23,56,81,20,4,24,93);
         for (Integer num : numbers) {
             System.out.println(Integer.toBinaryString(num));
         }
@@ -27,6 +28,13 @@ public class MaximumBitwiseAndPair {
                         numbers.set(j, 0);
                     }
                 }
+                /*
+                for (Integer num: numbers) {
+                    //If count >= 2, set numbers whose ith bit is zero to 0.
+                    if ((num & ithBit) == 0) {
+                        num = 0;
+                    }
+                }*/
             }
         }
         return ans;

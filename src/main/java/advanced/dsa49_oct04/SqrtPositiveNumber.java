@@ -1,4 +1,4 @@
-package advanced.dsa47_oct04;
+package advanced.dsa49_oct04;
 
 public class SqrtPositiveNumber {
     public static void main(String[] args) {
