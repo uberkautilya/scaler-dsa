@@ -5,7 +5,7 @@ public class SqrtPositiveNumber {
         int sqrt = new SqrtPositiveNumber().sqrt(26);
         System.out.println("sqrt = " + sqrt);
 
-        int sqrtWithBinarySort = new SqrtPositiveNumber().sqrtBinarySearch(16);
+        int sqrtWithBinarySort = new SqrtPositiveNumber().sqrtBinarySearch(3);
         System.out.println("sqrtWithBinarySort = " + sqrtWithBinarySort);
     }
 
@@ -27,7 +27,7 @@ public class SqrtPositiveNumber {
      */
     private int sqrtBinarySearch(Integer number) {
         int ans = -1;
-        int l = 0;
+        int l = 1;
         int h = number;
         while (l <= h) {
             int m = (l + h) / 2;
