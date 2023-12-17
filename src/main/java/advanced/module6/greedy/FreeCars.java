@@ -1,9 +1,8 @@
 package advanced.module6.greedy;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import advanced.module6.MinHeap;
+
+import java.util.*;
 
 /**
  * Given two arrays, A and B of size N. A[i] represents the time by which you can buy the ith car without paying any money.
@@ -25,8 +24,8 @@ public class FreeCars {
         timeArray = new ArrayList<>(Arrays.asList(1, 3, 1, 7, 2, 7, 1, 7, 6, 7, 8, 3, 3, 5, 4, 4, 5));
         profitArray = new ArrayList<>(Arrays.asList(2, 4, 6, 8, 4, 4, 4, 11, 8, 11, 8, 7, 7, 7, 6, 10, 4));
 
-        timeArray = new ArrayList<>(Arrays.asList(3, 8, 7, 5));
-        profitArray = new ArrayList<>(Arrays.asList(3, 1, 7, 19));
+//        timeArray = new ArrayList<>(Arrays.asList(3, 8, 7, 5));
+//        profitArray = new ArrayList<>(Arrays.asList(3, 1, 7, 19));
 
         int maxProfit = new FreeCars().solve(timeArray, profitArray);
         System.out.println("maxProfit = " + maxProfit);
@@ -40,17 +39,27 @@ public class FreeCars {
         }
         Collections.sort(pairs);
 
+        //Holds the profits added at any given time. If a higher profit comes, the min from this is replaced with the new value
+        MinHeap minHeap = new MinHeap();
 
-        int profit = pairs.get(0).profit;
-        int currentTime = 1; //Takes 1 minute to buy the first car
-        for (int i = 1; i < size; i++) {
-            Pair thisPair = pairs.get(i);
+        int profit = 0;
+        int currentTime = 0; //Takes 1 minute to buy the first car
+        for (int i = 0; i < size; i++) {
+            int thisTime = pairs.get(i).time;
+            int thisProfit = pairs.get(i).profit;
 
-            if ((currentTime + 1) <= thisPair.time) {
-                profit += thisPair.profit;
-                profit = profit % 1000_000_007;
+            if (currentTime + 1 <= thisTime) {
+                minHeap.insert(thisProfit);
+                profit += thisProfit;
                 currentTime++;
+            } else if (thisProfit > minHeap.peek()) {
+                //Here, we trash a lower value added at a previous step, for a better profit one at this step
+                //Thus currentTime is not incremented - we are correcting an old transaction
+                profit -= minHeap.getMin();
+                profit += thisProfit;
+                minHeap.insert(thisProfit);
             }
+            profit = profit % 1000_000_007;
         }
         return profit;
     }
