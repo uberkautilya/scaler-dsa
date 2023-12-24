@@ -1,5 +1,6 @@
 package advanced.module7.backtracking;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -13,13 +14,16 @@ public class SudokuAssignment {
             k++;
         }
         new SudokuAssignment().solveSudoku(mat);
+        for (char[] chars : mat) {
+            System.out.println(Arrays.toString(chars));
+        }
     }
 
     public void solveSudoku(char[][] A) {
         char[][] ans = new char[9][9];
         sudoku(A, 0, ans);
-        for(int i=0; i<A.length; i++){
-            for(int j=0; j<A[i].length; j++){
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0; j < A[i].length; j++) {
                 A[i][j] = ans[i][j];
             }
         }
