@@ -1,6 +1,6 @@
 package advanced.module7.dynamicprogramming;
 
-public class CombinationToAnAmount {
+public class PermutationToAnAmount {
     public static void main(String[] args) {
         int amount;
         int[] denominations;
