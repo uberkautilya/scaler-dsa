@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 
 /**
- * In the class the approach with array of adjacency list was discussed, adjoinAdjacencyListArray and visited array.
+ * In the class the approach with array of adjacency list was discussed, adjacencyListArray and visited array.
  * Here, the same has been implemented with HashMap.
  */
 public class DFSearchArrayImplementation {
