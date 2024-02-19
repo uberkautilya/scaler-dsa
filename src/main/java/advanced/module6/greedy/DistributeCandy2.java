@@ -4,6 +4,8 @@ package advanced.module6.greedy;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static java.lang.Integer.max;
+
 /**
  * N children are standing in a line. Each child is assigned a rating value.
  * <p>
@@ -12,17 +14,18 @@ import java.util.Arrays;
  * Each child must have at least one candy.
  * Children with a higher rating get more candies than their neighbors.
  * What is the minimum number of candies you must give?
+ * T.C. = O(N), S.C. = O(N)
  */
-public class DistributeCandy {
+public class DistributeCandy2 {
     public static void main(String[] args) {
         ArrayList<Integer> marksScored = new ArrayList<>(Arrays.asList(1, 5, 2, 1));
-        new DistributeCandy().candy(marksScored);
+        new DistributeCandy2().candy(marksScored);
     }
 
     public int candy(ArrayList<Integer> A) {
         int size = A.size();
-        ArrayList<Integer> candyCount = new ArrayList<>();
 
+        ArrayList<Integer> candyCount = new ArrayList<>();
         candyCount.set(0, 1);
         for (int i = 1; i < size; i++) {
             candyCount.add(1);
@@ -30,17 +33,19 @@ public class DistributeCandy {
                 candyCount.set(i, candyCount.get(i - 1) + 1);
             }
         }
-        //Now iterate in the reverse direction to find the total count of candies
-        int totalCandyCount = candyCount.get(size - 1);
+        ArrayList<Integer> candyCountRTL = new ArrayList<>();
+        candyCountRTL.set(size - 1, 1);
         for (int i = size - 2; i >= 0; i--) {
+            candyCountRTL.set(i, 1);
             if (A.get(i) > A.get(i + 1)) {
-                int maxCount = (candyCount.get(i + 1) + 1) > candyCount.get(i) ?
-                        candyCount.get(i + 1) + 1 :
-                        candyCount.get(i);
-                candyCount.set(i, maxCount);
+                candyCountRTL.add(i, candyCountRTL.get(i + 1) + 1);
             }
-            totalCandyCount += candyCount.get(i);
         }
-        return totalCandyCount;
+
+        int ans = 0;
+        for (int i = 0; i < size; i++) {
+            ans += max(candyCount.get(i), candyCountRTL.get(i));
+        }
+        return ans;
     }
 }
