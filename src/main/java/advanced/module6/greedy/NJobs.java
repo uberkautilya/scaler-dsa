@@ -30,7 +30,7 @@ public class NJobs {
         int count = 0;
         int time = 0;
         for (Pair pair : pairList) {
-            if (time < pair.key) {
+            if (time <= pair.key) {
                 count++;
                 time = pair.value;
             }
