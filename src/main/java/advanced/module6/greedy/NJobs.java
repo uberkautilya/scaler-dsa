@@ -10,6 +10,7 @@ import java.util.List;
  * Given N jobs -> Start and end times.
  * Find the maximum number of jobs that can be completed if only one job can be completed at a given time
  * Solution: Greedily select the job that ends earliest
+ * T.C. = O(NlogN) -> From sorting, S.C. = O(N) -> From pairs
  */
 public class NJobs {
     public static void main(String[] args) {
