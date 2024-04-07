@@ -1,3 +1,4 @@
+-- Active: 1712129391218@@localhost@3306@school
 -- inner join: Without the on clause it would have been called a cross join
 use school;
 select * from batches b ;
@@ -10,10 +11,9 @@ from
 	students s join batches b
 on s.batch_id = b.batch_id ;
 
-
 -- self-join with the same table
 select s.name, buddy.name
-from students as s join students as buddy
+from students s join students buddy
 on s.buddy_id = buddy.id;
 
 select * from students s join batches b on s.batch_id = b.batch_id ;

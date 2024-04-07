@@ -1,7 +1,7 @@
 package advanced.module7.graphs.traversal;
 
 public class UndirectedGraphCycleExistsCheck {
-    public static boolean isCyclic(int source, int parent) {
+/*    public static boolean isCyclic(int source, int parent) {
         isVisited[source] = true;
 
         for(all nodes u connected to source){
@@ -16,5 +16,5 @@ public class UndirectedGraphCycleExistsCheck {
             }
         }
         return false;
-    }
+    }*/
 }

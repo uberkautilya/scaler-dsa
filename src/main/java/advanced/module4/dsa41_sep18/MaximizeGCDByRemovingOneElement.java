@@ -1,5 +1,8 @@
 package advanced.module4.dsa41_sep18;
 
+/**
+ * GCD: Greatest Common Divisor or the highest common factor
+ */
 public class MaximizeGCDByRemovingOneElement {
     public static void main(String[] args) {
         int maxGcd = deleteOneElement(new int[]{7, 98, 49});

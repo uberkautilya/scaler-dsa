@@ -7,7 +7,7 @@ package advanced.module7.dynamicprogramming.dp4applications_of_knapsack;
 public class MetalBar {
     //Here we have 1 based indexing
 
-    int dp[N+1][N+1]
+ /*   int dp[N+1][N+1]
 
     //i tracks the item length, j is the length remaining
 
@@ -34,7 +34,7 @@ public class MetalBar {
 
         }
     }
-    return dp[N][N];
+    return dp[N][N];*/
 
 
 
