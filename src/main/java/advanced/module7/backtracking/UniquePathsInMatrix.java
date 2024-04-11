@@ -50,8 +50,7 @@ public class UniquePathsInMatrix {
 
     private static void recursePaths(int rowIndex, int columnIndex, int unvisitedCellCount, int[][] A) {
         if (A[rowIndex][columnIndex] == 2) {
-            System.out.println("Destination reached");
-            //Reached the destination cell
+            // Reached the destination cell
             if (unvisitedCellCount == 0) {
                 validPathCount++;
             }
@@ -60,22 +59,21 @@ public class UniquePathsInMatrix {
         // Current recursion stack can't move into this cell - mark as visited
         A[rowIndex][columnIndex] = -1;
 
-        System.out.println("\nunvisitedCellCount = " + unvisitedCellCount);
         for (int i = 0; i < 4; i++) {
             int u = rowIndex + x[i];
             int v = columnIndex + y[i];
 
             if (isValid(u, v, A)) {
-                System.out.println("unvisitedCellCount = " + unvisitedCellCount);
-                System.out.println(Arrays.deepToString(A));
                 recursePaths(u, v, unvisitedCellCount - 1, A);
             }
         }
+        // Reset the cell value to 0. Arrays are passed by reference in Java
+        A[rowIndex][columnIndex] = 0;
     }
 
     private static boolean isValid(int i, int j, int[][] A) {
-        return (0 <= i) && (0 <= j) &&
-                (i < A.length) && (j < A[0].length) &&
-                (A[i][j] != -1);
+        return (0 <= i) && (0 <= j) &&                  // Array out of bounds
+                (i < A.length) && (j < A[0].length) &&  // Array out of bounds
+                (A[i][j] != -1);                        // The cell is blocked
     }
 }

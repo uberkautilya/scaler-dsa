@@ -1,4 +1,4 @@
-package advanced.module7.dynamicprogramming;
+package advanced.module7.dynamicprogramming.dp2_two_dimentional;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Find maximum subsequence (may or may not be contiguous) sum from a given integer array of size N, where you cannot select adjacent elements.
  * More complex variation is discussed below.
  */
-public class MaxSumWithoutAdjacentElements {
+public class MaxSumWithoutAdjacentElementsWithDP {
     public static void main(String[] args) {
 
     }
@@ -33,21 +33,23 @@ public class MaxSumWithoutAdjacentElements {
     }
 
     public static int findBestWay(ArrayList<Integer> maxArray) {
-        int max1 = getMax(maxArray, maxArray.size() - 1, false);
-        int max2 = getMax(maxArray, maxArray.size() - 1, true);
+        int max1 = getMax(maxArray, maxArray.size() - 1, false, 0);
+        int max2 = getMax(maxArray, maxArray.size() - 1, false, 0);
 
         return Math.max(max1, max2);
     }
-
-    public static int getMax(ArrayList<Integer> maxArray, int currentIndex, boolean isCurrentChosen) {
-        if (currentIndex < 0) return 0;
-        if (isCurrentChosen) {
+    static int ans = 0;
+    public static int getMax(ArrayList<Integer> maxArray, int currentIndex, boolean isLastChosen, int sum) {
+        if (currentIndex < 0) {
+            ans = Math.max(ans, sum);
+        }
+        if (isLastChosen) {
             return maxArray.get(currentIndex) +
-                    getMax(maxArray, currentIndex - 1, false);
+                    getMax(maxArray, currentIndex - 1, true, sum);
         } else {
             return Math.max(
-                    getMax(maxArray, currentIndex - 1, true),
-                    getMax(maxArray, currentIndex - 1, false)
+                    getMax(maxArray, currentIndex - 1, true, sum),
+                    getMax(maxArray, currentIndex - 1, false, sum)
             );
         }
     }
