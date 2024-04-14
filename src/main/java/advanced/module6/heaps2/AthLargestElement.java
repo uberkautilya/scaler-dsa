@@ -1,7 +1,6 @@
 package advanced.module6.heaps2;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
@@ -23,25 +22,27 @@ public class AthLargestElement {
 
     public static int[] solve(int A, int[] B) {
         int[] result = new int[B.length];
-        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(Comparator.reverseOrder());
-        for (int i = 0; i < B.length; i++) {
+        Arrays.fill(result, -1);
+        //Create min heap to hold the A largest numbers
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+        for (int i = 0; i < B.length && i < A; i++) {
             priorityQueue.add(B[i]);
-            int val = getAthHighest(new PriorityQueue<>(priorityQueue), A);
-            result[i] = val;
+        }
+        // For Ath element, which is at index A-1, get the min element from the PQ, as Ath min is present at top
+        if (null != priorityQueue.peek()) {
+            result[A-1] = priorityQueue.peek();
+        }
+
+        for (int i = A; i < B.length; i++) {
+            if (null == priorityQueue.peek()) {
+                break;
+            }
+            if (priorityQueue.peek() < B[i]) {
+                priorityQueue.remove();
+                priorityQueue.add(B[i]);
+            }
+            result[i] = priorityQueue.peek();
         }
         return result;
-    }
-
-    private static Integer getAthHighest(PriorityQueue<Integer> integers, int popCount) {
-        int count = 0;
-        Integer value = null;
-        while (integers.peek() != null && count < popCount) {
-            value = integers.remove();
-            count++;
-        }
-        if (count == popCount) {
-            return value;
-        }
-        return -1;
     }
 }
