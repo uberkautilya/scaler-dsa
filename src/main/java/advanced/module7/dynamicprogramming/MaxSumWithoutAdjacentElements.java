@@ -1,6 +1,7 @@
 package advanced.module7.dynamicprogramming;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Find maximum subsequence (may or may not be contiguous) sum from a given integer array of size N, where you cannot select adjacent elements.
@@ -8,7 +9,13 @@ import java.util.ArrayList;
  */
 public class MaxSumWithoutAdjacentElements {
     public static void main(String[] args) {
-
+        ArrayList<ArrayList<Integer>> a = new ArrayList<>();
+        ArrayList<Integer> list1 = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
+        ArrayList<Integer> list2 = new ArrayList<>(Arrays.asList(2, 3, 4, 5));
+        a.add(list1);
+        a.add(list2);
+        int maxSum = adjacent(a);
+        System.out.println("maxSum = " + maxSum);
     }
 
 
@@ -21,7 +28,7 @@ public class MaxSumWithoutAdjacentElements {
      * <p>
      * Note: You are allowed to choose more than 2 numbers from the grid.
      */
-    public int adjacent(ArrayList<ArrayList<Integer>> A) {
+    public static int adjacent(ArrayList<ArrayList<Integer>> A) {
         ArrayList<Integer> array1 = A.get(0);
         ArrayList<Integer> array2 = A.get(1);
 
@@ -29,26 +36,29 @@ public class MaxSumWithoutAdjacentElements {
         for (int i = 0; i < array1.size(); i++) {
             maxArray.add(array1.get(i) > array2.get(i) ? array1.get(i) : array2.get(i));
         }
-        return findBestWay(maxArray);
+        int[] dp = new int[maxArray.size()];
+        Arrays.fill(dp, Integer.MIN_VALUE);
+        return getMax(maxArray, 0, false, dp);
     }
 
-    public static int findBestWay(ArrayList<Integer> maxArray) {
-        int max1 = getMax(maxArray, maxArray.size() - 1, false);
-        int max2 = getMax(maxArray, maxArray.size() - 1, true);
+    public static int getMax(ArrayList<Integer> maxArray, int currentIndex, boolean isPreviousChosen, int[] dp) {
+        if (currentIndex == maxArray.size()) return 0;
 
-        return Math.max(max1, max2);
-    }
+        if (dp[currentIndex] != Integer.MIN_VALUE && !isPreviousChosen) {
+            return dp[currentIndex];
+        }
+        int val = getMax(maxArray, currentIndex + 1, false, dp);
+        int max = val;
 
-    public static int getMax(ArrayList<Integer> maxArray, int currentIndex, boolean isCurrentChosen) {
-        if (currentIndex < 0) return 0;
-        if (isCurrentChosen) {
-            return maxArray.get(currentIndex) +
-                    getMax(maxArray, currentIndex - 1, false);
-        } else {
-            return Math.max(
-                    getMax(maxArray, currentIndex - 1, true),
-                    getMax(maxArray, currentIndex - 1, false)
+        if (!isPreviousChosen) {
+            max = Math.max(
+                    maxArray.get(currentIndex) + getMax(maxArray, currentIndex + 1, true, dp),
+                    val
             );
         }
+        if (!isPreviousChosen) {
+            dp[currentIndex] = max;
+        }
+        return max;
     }
 }

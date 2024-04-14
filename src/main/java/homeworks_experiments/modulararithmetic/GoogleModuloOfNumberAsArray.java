@@ -27,7 +27,7 @@ public class GoogleModuloOfNumberAsArray {
         long powerOf10PercentDivisor = 1;
 
         for (int i = length - 2; i >= 0; i--) {
-            //10's positive power begins at index 1 only. Hence loop start at second-last digit
+            //10's positive power begins at index 1 only. Hence, loop start at second-last digit
             powerOf10PercentDivisor = (  powerOf10PercentDivisor * (10 % divisor) ) % divisor;
 
             result += ( (array[i] % divisor) * powerOf10PercentDivisor ) % divisor;
