@@ -36,20 +36,27 @@ public class MinHeap {
 
         while (i < size) {
             //Index holding the left child element of current node
-            int leftC = 2 * i + 1;
-            int rightC = 2 * i + 2;
-            if (rightC < size) {
-                if (minHeap.get(leftC) <= minHeap.get(i) && minHeap.get(leftC) <= minHeap.get(rightC)) {
-                    swap(minHeap, leftC, i);
-                    i = leftC;
-                } else if (minHeap.get(rightC) <= minHeap.get(i) && minHeap.get(rightC) <= minHeap.get(leftC)) {
-                    swap(minHeap, rightC, i);
-                    i = rightC;
+            int lcIndex = 2 * i + 1;
+            int rcIndex = 2 * i + 2;
+
+            Integer ithElement = minHeap.get(i);
+            Integer leftChild = minHeap.get(lcIndex);
+            Integer rightChild = minHeap.get(rcIndex);
+
+            if (rcIndex < size) {
+                // rcIndex exists
+                if (leftChild <= ithElement && leftChild <= rightChild) {
+                    swap(minHeap, lcIndex, i);
+                    i = lcIndex;
+                } else if (rightChild <= ithElement && rightChild <= leftChild) {
+                    swap(minHeap, rcIndex, i);
+                    i = rcIndex;
                 }
-            } else if (leftC < size) {
-                if (minHeap.get(leftC) <= minHeap.get(i)) {
-                    swap(minHeap, leftC, i);
-                    i = leftC;
+            } else if (lcIndex < size) {
+                // rcIndex is out of bounds
+                if (leftChild <= ithElement) {
+                    swap(minHeap, lcIndex, i);
+                    i = lcIndex;
                 }
             } else {
                 break;
