@@ -1,6 +1,6 @@
-package lld.intro.main_package.sub_package;
+package lld.oops1.main_package.sub_package;
 
-import lld.intro.main_package.Student;
+import lld.oops1.main_package.Student;
 
 public class Client {
     public static void main(String[] args) {

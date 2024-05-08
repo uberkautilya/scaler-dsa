@@ -1,4 +1,4 @@
-package lld.intro.main_package;
+package lld.oops1.main_package;
 
 public class Student {
     private String name;
