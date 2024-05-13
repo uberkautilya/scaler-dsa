@@ -16,5 +16,13 @@ public class Client {
         student.display101();
         // stu hides the Student(object) level static methods
         stu.display101();
+
+
+        System.out.println("-----------------------");
+        User.display101();
+        Student.display101();
+
+        System.out.println("User.uId = " + User.uId);
+        System.out.println("Student.uId = " + Student.uId);
     }
 }
