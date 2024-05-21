@@ -1,4 +1,4 @@
-package low_level_design.concurrency.one;
+package low_level_design.concurrency.runnable_and_threads;
 
 public class Client {
     public static void main(String[] args) {

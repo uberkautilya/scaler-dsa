@@ -1,4 +1,4 @@
-package low_level_design.concurrency.one.runnable_preferred;
+package low_level_design.concurrency.runnable_and_threads.runnable_preferred;
 
 public class Task implements Runnable{
     int val;
