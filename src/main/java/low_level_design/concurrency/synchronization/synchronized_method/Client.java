@@ -23,7 +23,7 @@ public class Client {
         subtractFuture.get();
         addFuture.get();
 
-        System.out.println("Value.x = " + Value.staticVal);
+        System.out.println("Value.x = " + Value.getStaticVal());
         System.out.println("v.value = " + v.value);
         executorService.shutdown();
     }

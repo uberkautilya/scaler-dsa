@@ -5,7 +5,7 @@ package low_level_design.concurrency.synchronization.synchronized_method;
  */
 public class Value {
     int value;
-    static int staticVal = 0;
+    static private int staticVal = 0;
 
     Value(int val) {
         this.value = val;
@@ -25,5 +25,9 @@ public class Value {
 
     static synchronized void decrementStatic(int i) {
         staticVal -= i;
+    }
+
+    public static int getStaticVal() {
+        return staticVal;
     }
 }
