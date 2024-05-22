@@ -11,7 +11,7 @@ public class SubtractCallable implements Callable<Void> {
 
     public Void call() {
         for (int i = 1; i <= 50_000; i++) {
-            // This is not atomic, but three instructions
+            //Call the synchronized methods on v
             Value.decrementStatic(i);
             v.decrement(i);
         }

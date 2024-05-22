@@ -11,7 +11,7 @@ public class AddCallable implements Callable<Void> {
 
     public Void call() {
         for (int i = 1; i <= 50_000; i++) {
-            // This is not atomic, but three instructions
+            // Call synchronized methods of v
             Value.incrementStatic(i);
             v.increment(i);
         }
