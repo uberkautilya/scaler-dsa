@@ -1,8 +1,11 @@
-package low_level_design.concurrency.synchronization.syncrhonized_method;
+package low_level_design.concurrency.synchronization.synchronized_method;
 
+/**
+ * synchronized methods execute only when a lock is achieved on the Value object on whom the method is called
+ */
 public class Value {
     int value;
-    static int x = 0;
+    static int staticVal = 0;
 
     Value(int val) {
         this.value = val;
@@ -17,10 +20,10 @@ public class Value {
     }
 
     static synchronized void incrementStatic(int i) {
-        x += i;
+        staticVal += i;
     }
 
     static synchronized void decrementStatic(int i) {
-        x -= i;
+        staticVal -= i;
     }
 }

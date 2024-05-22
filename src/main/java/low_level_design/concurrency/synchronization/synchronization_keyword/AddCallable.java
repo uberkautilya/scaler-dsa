@@ -1,27 +1,23 @@
-package low_level_design.concurrency.synchronization.reentrantlock;
+package low_level_design.concurrency.synchronization.synchronization_keyword;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.locks.Lock;
 
 public class AddCallable implements Callable<Integer> {
     private Value v;
-    Lock lock;
 
-    public AddCallable(Value v, Lock reentrantLock) {
-        this.lock = reentrantLock;
+    public AddCallable(Value v) {
         this.v = v;
     }
 
     public Integer call() {
         for (int i = 1; i <= 50_000; i++) {
-            this.lock.lock();
             //region Critical Section
-
-            // This is not atomic, but three instructions
-            this.v.value += 1;
-
+            synchronized (v) {
+                // This is not atomic, but three instructions
+                this.v.value += 1;
+            }
             //endregion
-            this.lock.unlock();
         }
         return this.v.value;
     }

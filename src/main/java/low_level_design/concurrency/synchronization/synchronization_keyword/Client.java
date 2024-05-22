@@ -1,4 +1,4 @@
-package low_level_design.concurrency.synchronization.syncrhonized_method;
+package low_level_design.concurrency.synchronization.synchronization_keyword;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -14,13 +14,12 @@ public class Client {
         AddCallable addCallable = new AddCallable(v);
         SubtractCallable subtractCallable = new SubtractCallable(v);
 
-        Future<Void> subtractFuture = executorService.submit(subtractCallable);
-        Future<Void> addFuture = executorService.submit(addCallable);
+        Future<Integer> subtractFuture = executorService.submit(subtractCallable);
+        Future<Integer> addFuture = executorService.submit(addCallable);
 
         subtractFuture.get();
         addFuture.get();
 
-        System.out.println("Value.x = " + Value.x);
         System.out.println("v.value = " + v.value);
         executorService.shutdown();
     }
