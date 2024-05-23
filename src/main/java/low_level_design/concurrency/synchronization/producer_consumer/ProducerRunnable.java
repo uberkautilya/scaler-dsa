@@ -13,7 +13,7 @@ public class ProducerRunnable implements Runnable {
     public void run() {
         while (true) {
             synchronized (store) {
-                if (store.list.size() < store.maxSize) {
+                if (store.isAdditionPossible()) {
                     store.addItem();
                 }
             }

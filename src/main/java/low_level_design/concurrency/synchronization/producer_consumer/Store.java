@@ -20,4 +20,12 @@ public class Store {
         System.out.println("Consumer: Removing item at index: " + (list.size() - 1));
         this.list.remove(this.list.size() - 1);
     }
+
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+
+    public boolean isAdditionPossible() {
+        return list.size() < maxSize;
+    }
 }

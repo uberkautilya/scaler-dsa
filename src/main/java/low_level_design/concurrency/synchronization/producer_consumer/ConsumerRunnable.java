@@ -11,7 +11,7 @@ public class ConsumerRunnable implements Runnable{
     public void run() {
         while (true) {
             synchronized (store) {
-                if (!store.list.isEmpty()) {
+                if (!store.isEmpty()) {
                     store.removeItem();
                 }
             }

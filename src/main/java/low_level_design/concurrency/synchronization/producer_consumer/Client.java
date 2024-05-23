@@ -6,7 +6,6 @@ import java.util.concurrent.Executors;
 public class Client {
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newCachedThreadPool();
-
         Store store = new Store(5);
 
         for (int i = 0; i < 25; i++) {
