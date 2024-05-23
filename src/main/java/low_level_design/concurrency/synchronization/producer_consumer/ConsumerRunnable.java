@@ -1,7 +1,7 @@
 package low_level_design.concurrency.synchronization.producer_consumer;
 
 public class ConsumerRunnable implements Runnable{
-    Store store;
+    final Store store;
 
     public ConsumerRunnable(Store store) {
         this.store = store;
