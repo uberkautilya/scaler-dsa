@@ -1,7 +1,5 @@
 package low_level_design.concurrency.synchronization.producer_consumer;
 
-import java.util.concurrent.ExecutorService;
-
 public class ProducerRunnable implements Runnable {
     final Store store;
 
