@@ -1,31 +1,32 @@
 package low_level_design.concurrency.semaphores;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Store {
     int maxSize;
-    List<Object> list = new ArrayList<>();
+    //As we allow multiple threads simultaneously to operate on the collection
+    Queue<Object> queue = new ConcurrentLinkedQueue<>();
 
     public Store(int maxSize) {
         this.maxSize = maxSize;
     }
 
     public void addItem() {
-        System.out.println("Producer: Items size: " + list.size());
-        this.list.add(new Object());
+        System.out.println("Producer: Items size: " + queue.size());
+        this.queue.add(new Object());
     }
 
     public void removeItem() {
-        System.out.println("Consumer: Removing item at index: " + (list.size() - 1));
-        this.list.remove(this.list.size() - 1);
+        System.out.println("Consumer: Removing item at index: " + (queue.size() - 1));
+        this.queue.remove(this.queue.size() - 1);
     }
 
     public boolean isEmpty() {
-        return list.isEmpty();
+        return queue.isEmpty();
     }
 
     public boolean isAdditionPossible() {
-        return list.size() < maxSize;
+        return queue.size() < maxSize;
     }
 }
