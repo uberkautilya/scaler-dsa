@@ -1,6 +1,5 @@
 package references.streams_exception_handling.aa_functional_and_reactive_programming;
 
-import io.reactivex.*;
 import io.reactivex.rxjava3.core.Flowable;
 
 import java.util.List;

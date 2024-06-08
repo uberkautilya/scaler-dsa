@@ -41,8 +41,7 @@ public class Sample {
         List<String> iataCodes = List.of("AUS", "IAH", "DFW", "TAS", "SAT");
 
         iataCodes.stream()
-                .map(convertToRuntimeException(iataCode ->
-                        getNameOfAirport(iataCode)))
+                .map(convertToRuntimeException(Sample::getNameOfAirport))
                 .forEach(System.out::println);
     }
 }

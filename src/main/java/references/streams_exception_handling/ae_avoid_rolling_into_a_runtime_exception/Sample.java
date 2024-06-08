@@ -33,7 +33,7 @@ public class Sample {
         List<String> iataCodes = List.of("AUS", "IAH", "DFW", "TAS", "SAT");
 
         iataCodes.stream()
-                .map(iataCode -> getNameOfAirport2(iataCode))
+                .map(Sample::getNameOfAirport2)
                 .forEach(System.out::println);
         //curl up in a corner and cry
 

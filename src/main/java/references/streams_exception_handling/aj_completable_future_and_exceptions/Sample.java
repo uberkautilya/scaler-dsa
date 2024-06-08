@@ -6,53 +6,54 @@ import java.util.Scanner;
 import java.util.concurrent.CompletableFuture;
 
 public class Sample {
-  public static String getNameOfAirport(String iata) throws IOException {
-    var url = "https://soa.smext.faa.gov/asws/api/airport/status/" + iata;
+    public static String getNameOfAirport(String iata) throws IOException {
+        var url = "https://soa.smext.faa.gov/asws/api/airport/status/" + iata;
 
-    try(var scanner = new Scanner(new URL(url).openStream())) {
-      var response = scanner.nextLine();
+//?    try(var scanner = new Scanner(URI.create(url).toURL().openStream())) {
+        try (var scanner = new Scanner(new URL(url).openStream())) {
+            var response = scanner.nextLine();
 
-      if(!response.contains("Name")) {
-	throw new RuntimeException("Invalid airport code " + iata);
-      }
+            if (!response.contains("Name")) {
+                throw new RuntimeException("Invalid airport code " + iata);
+            }
 
-      return response.split("\"")[3];
-      //way too lazy to do the real work to get the data
-    }
-  }
-
-  public static int compute() {
-    return 2;
-  }
-
-  public static CompletableFuture<Integer> create() {
-    return CompletableFuture.supplyAsync(() -> compute());
-  }
-
-  public static int transform(int number, int multiplier) {
-    System.out.println("transform called...");
-   
-    if(Math.random() > 0.5) {
-      System.out.println("transform failed...");
-      throw new RuntimeException("something went wrong");
+            return response.split("\"")[3];
+            //way too lazy to do the real work to get the data
+        }
     }
 
-    return number * multiplier;
-  }
+    public static int compute() {
+        return 2;
+    }
 
-  public static void main(String[] args) {
-    create()
-      .thenApply(data -> transform(data, 10))
-      .exceptionally(throwable -> handleException(throwable))
-      .thenApply(data -> transform(data, 2))
-      .exceptionally(throwable -> handleException(throwable))
-      .thenAccept(data -> System.out.println(data));
-  }
+    public static CompletableFuture<Integer> create() {
+        return CompletableFuture.supplyAsync(Sample::compute);
+    }
 
-  public static int handleException(Throwable throwable) {
-    System.out.println("handling exception..." + throwable.getMessage());
-    return 100;
-  }
+    public static int transform(int number, int multiplier) {
+        System.out.println("transform called...");
+
+        if (Math.random() > 0.5) {
+            System.out.println("transform failed...");
+            throw new RuntimeException("something went wrong");
+        }
+
+        return number * multiplier;
+    }
+
+    public static void main(String[] args) {
+        create()
+                .thenApply(data -> transform(data, 10))
+                .exceptionally(Sample::handleException)
+                .thenApply(data -> transform(data, 2))
+                .exceptionally(Sample::handleException)
+                .thenAccept(System.out::println);
+    }
+
+    public static int handleException(Throwable throwable) {
+        System.out.println("handling exception..." + throwable.getMessage());
+        return 100;
+    }
 }
 
 /*

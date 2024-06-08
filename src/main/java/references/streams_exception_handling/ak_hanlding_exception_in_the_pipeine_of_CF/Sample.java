@@ -28,7 +28,7 @@ public class Sample {
     public static CompletableFuture<Void> processIATA(String iataCode) {
         return CompletableFuture.supplyAsync(() -> getNameOfAirport(iataCode))
                 .thenApply(String::toUpperCase)
-                .exceptionally(throwable -> throwable.getMessage())
+                .exceptionally(Throwable::getMessage)
                 .thenAccept(System.out::println);
     }
 
@@ -41,7 +41,7 @@ public class Sample {
 
         try {
             Thread.sleep(10000);
-        } catch (Exception ex) {
+        } catch (Exception _) {
         }
     }
 }

@@ -1,7 +1,7 @@
 package references.streams_exception_handling.al_exceptions_in_reactive_streams;
 
-import io.reactivex.*;
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,7 +28,7 @@ public class Sample {
         var iataCodes = List.of("AUS", "IAH", "DFW", "TAS", "SAT");
 
         Flowable.fromIterable(iataCodes)
-                .map(iataCode -> getNameOfAirport(iataCode))
+                .map(Sample::getNameOfAirport)
                 .map(String::toUpperCase)
                 .subscribe(
                         System.out::println, //Data channel
