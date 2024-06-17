@@ -1,4 +1,4 @@
-package low_level_design_two.design_pattterns;
+package low_level_design_two.design_pattterns.singleton;
 
 public class Singleton {
     //static field initialization is done by the main thread at the time of class loading
