@@ -5,6 +5,9 @@ public class Student implements Prototype<Student> {
     String name;
     String batch;
 
+    public Student() {
+    }
+
     public Student(Student st) {
         this.id = st.id;
         this.name = st.name;
