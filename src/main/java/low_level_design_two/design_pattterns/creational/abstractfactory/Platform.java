@@ -3,13 +3,26 @@ package low_level_design_two.design_pattterns.creational.abstractfactory;
 import low_level_design_two.design_pattterns.creational.abstractfactory.factories.Factory;
 
 public abstract class Platform {
-    String platform;
+
+    static Platform createPlatform(String inputPlatform) {
+        Platform platform = null;
+        inputPlatform = (inputPlatform != null) ? inputPlatform.trim().toUpperCase() : "NULL";
+        if (inputPlatform.equalsIgnoreCase("android")) {
+            platform = new Android();
+        } else if (inputPlatform.equalsIgnoreCase("ios")) {
+            platform = new IOS();
+        }
+        return platform;
+    }
+
     void setRefreshRate() {
 
     }
+
     void setTheme() {
 
     }
+
     //To change from a normal Factory to an Abstract Factory pattern
     abstract Factory createComponentFactory();
 
