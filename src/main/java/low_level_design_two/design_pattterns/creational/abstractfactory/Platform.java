@@ -10,7 +10,9 @@ public abstract class Platform {
     void setTheme() {
 
     }
+    //To change from a normal Factory to an Abstract Factory pattern
     abstract Factory createComponentFactory();
+
 //    Button createButton() {
 //        if (platform.equals("Windows")) {
 //            //create windows button
@@ -26,4 +28,7 @@ public abstract class Platform {
 //            }
 //        };
 //    }
+    //Evolution 1: Replace the if else conditions by moving the createButton to within the Platform implementations, which can return the appropriate Button
+    //Evolution 2: When there are many such components, even this approach introduces complexity into Implementations of Platform
+    // In such case, the platform implementation will only define a method that returns an appropriate factory that can then produce the components specific to the platform
 }
