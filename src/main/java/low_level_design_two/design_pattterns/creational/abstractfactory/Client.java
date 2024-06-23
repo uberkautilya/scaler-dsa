@@ -11,9 +11,10 @@ public class Client {
     private static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
+        System.out.println("Enter platform ('Android', 'iOS')");
         String inputPlatform = sc.nextLine();
 
-        Platform platform = Platform.createPlatform(inputPlatform);
+        Platform platform = Platform.getPlatform(inputPlatform);
         if (platform == null) {
             System.out.println("Invalid platform");
             return;

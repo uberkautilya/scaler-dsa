@@ -1,18 +1,12 @@
 package low_level_design_two.design_pattterns.creational.abstractfactory;
 
 import low_level_design_two.design_pattterns.creational.abstractfactory.factories.Factory;
+import low_level_design_two.design_pattterns.creational.abstractfactory.factories.PlatformFactory;
 
 public abstract class Platform {
 
-    static Platform createPlatform(String inputPlatform) {
-        Platform platform = null;
-        inputPlatform = (inputPlatform != null) ? inputPlatform.trim().toUpperCase() : "NULL";
-        if (inputPlatform.equalsIgnoreCase("android")) {
-            platform = new Android();
-        } else if (inputPlatform.equalsIgnoreCase("ios")) {
-            platform = new IOS();
-        }
-        return platform;
+    public static Platform getPlatform(String platformName) {
+        return PlatformFactory.createPlatform(platformName);
     }
 
     void setRefreshRate() {
@@ -41,7 +35,7 @@ public abstract class Platform {
 //            }
 //        };
 //    }
-    //Evolution 1: Replace the if else conditions by moving the createButton to within the Platform implementations, which can return the appropriate Button
-    //Evolution 2: When there are many such components, even this approach introduces complexity into Implementations of Platform
+    //Evolution 1: Runtime Polymorphism - Factory: Replace the if else conditions by moving the createButton to within the Platform implementations, which can return the appropriate Button
+    //Evolution 2: Get factory based on type - Abstract Factory: When there are many such components, even this approach introduces complexity into Implementations of Platform
     // In such case, the platform implementation will only define a method that returns an appropriate factory that can then produce the components specific to the platform
 }
