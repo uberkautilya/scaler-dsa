@@ -1,7 +1,7 @@
-package low_level_design_two.design_pattterns.structural.adapter;
+package low_level_design_two.design_pattterns.structural.adapter.v1;
 
-public class PhonePe {
-    YesBankAPI yesBankAPI = new YesBankAPI();
+public class PhonePeClient {
+    BankAPI yesBankAPI = new YesBankAdapter();
     FastTagRecharge fastTagRecharge = new FastTagRecharge();
     PhonePeLoan phonePeLoan = new PhonePeLoan();
 
