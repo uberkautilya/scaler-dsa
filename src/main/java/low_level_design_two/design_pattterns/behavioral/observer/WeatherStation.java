@@ -2,7 +2,10 @@ package low_level_design_two.design_pattterns.behavioral.observer;
 
 import low_level_design_two.design_pattterns.behavioral.observer.observers.CurrentConditions;
 import low_level_design_two.design_pattterns.behavioral.observer.observers.Forecast;
+import low_level_design_two.design_pattterns.behavioral.observer.observers.Observer;
 import low_level_design_two.design_pattterns.behavioral.observer.observers.Statistics;
+import low_level_design_two.design_pattterns.behavioral.observer.subjects.AIWeatherData;
+import low_level_design_two.design_pattterns.behavioral.observer.subjects.Subject;
 import low_level_design_two.design_pattterns.behavioral.observer.subjects.WeatherData;
 
 /**
@@ -10,26 +13,30 @@ import low_level_design_two.design_pattterns.behavioral.observer.subjects.Weathe
  */
 public class WeatherStation {
     public static void main(String[] args) {
-        WeatherData weatherData = new WeatherData();
-        //Any push to the above subject should notify all its observers below
+        //Any push to the below subject should be notify all its observers below
+        Subject subject = new WeatherData();
 
         //I feel that - a super abstract class should allow a level of dependency inversion here as well
-        CurrentConditions currentConditionsObserver = new CurrentConditions(weatherData);
-        Forecast forecastObserver = new Forecast(weatherData);
-        Statistics statisticsObserver = new Statistics(weatherData);
+        Observer currentConditionsObserver = new CurrentConditions(subject);
+        Observer forecastObserver = new Forecast(subject);
+        Observer statisticsObserver = new Statistics(subject);
 
         System.out.println();
-        weatherData.setMeasurements(80, 65, 30.4f);
+        subject.setMeasurements(80, 65, 30.4f);
         System.out.println();
-        weatherData.setMeasurements(82, 70, 29.2f);
+        subject.setMeasurements(82, 70, 29.2f);
         System.out.println();
-        weatherData.setMeasurements(80, 65, 30.4f);
+        subject.setMeasurements(80, 65, 30.4f);
         System.out.println();
 
         currentConditionsObserver.deregister();
-        weatherData.setMeasurements(62, 90, 28.1f);
+        subject.setMeasurements(62, 90, 28.1f);
         System.out.println();
+
+        System.out.println("Changing subject to AIWeatherData");
+        Subject aiSubject = new AIWeatherData();
+        currentConditionsObserver.changeSubject(aiSubject);
         currentConditionsObserver.register();
-        weatherData.setMeasurements(99, 90, 28.1f);
+        aiSubject.setMeasurements(100, 100, 89.1f);
     }
 }
