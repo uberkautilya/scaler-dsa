@@ -1,4 +1,4 @@
-package low_level_design_two.design_pattterns.behavioral;
+package low_level_design_two.design_pattterns.behavioral.strategy;
 
 public class BikePathStrategy implements PathStrategy {
     @Override
