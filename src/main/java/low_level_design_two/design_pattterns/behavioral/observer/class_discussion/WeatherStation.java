@@ -1,12 +1,12 @@
-package low_level_design_two.design_pattterns.behavioral.observer;
+package low_level_design_two.design_pattterns.behavioral.observer.class_discussion;
 
-import low_level_design_two.design_pattterns.behavioral.observer.observers.CurrentConditions;
-import low_level_design_two.design_pattterns.behavioral.observer.observers.Forecast;
-import low_level_design_two.design_pattterns.behavioral.observer.observers.Observer;
-import low_level_design_two.design_pattterns.behavioral.observer.observers.Statistics;
-import low_level_design_two.design_pattterns.behavioral.observer.subjects.AIWeatherData;
-import low_level_design_two.design_pattterns.behavioral.observer.subjects.Subject;
-import low_level_design_two.design_pattterns.behavioral.observer.subjects.WeatherData;
+import low_level_design_two.design_pattterns.behavioral.observer.class_discussion.observers.CurrentConditions;
+import low_level_design_two.design_pattterns.behavioral.observer.class_discussion.observers.Forecast;
+import low_level_design_two.design_pattterns.behavioral.observer.class_discussion.observers.Observer;
+import low_level_design_two.design_pattterns.behavioral.observer.class_discussion.observers.Statistics;
+import low_level_design_two.design_pattterns.behavioral.observer.class_discussion.subjects.AIWeatherData;
+import low_level_design_two.design_pattterns.behavioral.observer.class_discussion.subjects.Subject;
+import low_level_design_two.design_pattterns.behavioral.observer.class_discussion.subjects.WeatherData;
 
 /**
  * This class is like a supplier to the Subject

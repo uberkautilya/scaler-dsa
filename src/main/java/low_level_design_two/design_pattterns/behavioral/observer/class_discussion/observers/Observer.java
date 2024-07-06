@@ -1,6 +1,6 @@
-package low_level_design_two.design_pattterns.behavioral.observer.observers;
+package low_level_design_two.design_pattterns.behavioral.observer.class_discussion.observers;
 
-import low_level_design_two.design_pattterns.behavioral.observer.subjects.Subject;
+import low_level_design_two.design_pattterns.behavioral.observer.class_discussion.subjects.Subject;
 
 /**
  * Observers need to implement this interface

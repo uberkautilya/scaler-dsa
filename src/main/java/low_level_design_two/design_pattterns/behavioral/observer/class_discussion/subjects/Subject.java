@@ -1,6 +1,6 @@
-package low_level_design_two.design_pattterns.behavioral.observer.subjects;
+package low_level_design_two.design_pattterns.behavioral.observer.class_discussion.subjects;
 
-import low_level_design_two.design_pattterns.behavioral.observer.observers.Observer;
+import low_level_design_two.design_pattterns.behavioral.observer.class_discussion.observers.Observer;
 
 public interface Subject {
     //Method used to feed the updates - which are then notified to the observers
