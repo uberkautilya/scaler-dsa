@@ -3,12 +3,27 @@ package low_level_design_three.tic_tac_toe.controller;
 import low_level_design_three.tic_tac_toe.models.Game;
 import low_level_design_three.tic_tac_toe.models.GameState;
 import low_level_design_three.tic_tac_toe.models.Player;
+import low_level_design_three.tic_tac_toe.strategies.winning.WinningStrategy;
+
+import java.util.List;
 
 public class GameController {
     //private Game game; -> This would make the controller tied to a single Game object
 
-    public Game startGame() {
-        return new Game();
+    public Game startGame(int dimension,
+                          List<Player> players,
+                          List<WinningStrategy> winStrategies) {
+        /*
+        Validate Before starting a game:
+        1. Check the player count. It needs to be equal to dimension-1.
+        2. You can have only one Bot in the game - just an example
+        3. Every player should have a separate symbol
+         */
+        return Game.getBuilder()
+                .setDimension(dimension)
+                .setPlayers(players)
+                .setWinStrategies(winStrategies)
+                .build();
     }
 
     public GameState checkGameState(Game game) {
@@ -16,7 +31,7 @@ public class GameController {
     }
 
     public void display(Game game) {
-
+        game.displayBoard();
     }
 
     public void makeMove(Game game) {
@@ -24,7 +39,7 @@ public class GameController {
     }
 
     public Player getWinner(Game game) {
-        return null;
+        return game.getWinner();
     }
 
     public void undo(Game game) {

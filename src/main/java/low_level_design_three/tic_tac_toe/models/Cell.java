@@ -6,6 +6,13 @@ public class Cell {
     private CellState cellState;
     private Symbol symbol;
 
+    public Cell(int row, int col) {
+        this.row = row;
+        this.col = col;
+        this.cellState = CellState.EMPTY;
+        this.symbol = new Symbol();
+    }
+
     public int getRow() {
         return row;
     }
@@ -36,5 +43,13 @@ public class Cell {
 
     public void setSymbol(Symbol symbol) {
         this.symbol = symbol;
+    }
+
+    public void display() {
+        if (symbol != null) {
+            System.out.print("| " + symbol.getSym() + "  |\t");
+        } else {
+            System.out.print("| \t |");
+        }
     }
 }
