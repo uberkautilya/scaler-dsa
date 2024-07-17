@@ -1,10 +1,13 @@
 package low_level_design_three.tic_tac_toe.model;
 
+import java.util.Scanner;
+
 public abstract class Player {
     private int id;
     private String name;
     private PlayerType playerType;
     private Symbol symbol;
+    Scanner sc = new Scanner(System.in);
 
     public Player(int id, String name, PlayerType playerType, Symbol symbol) {
         this.id = id;
@@ -44,4 +47,6 @@ public abstract class Player {
     public void setSymbol(Symbol symbol) {
         this.symbol = symbol;
     }
+
+    abstract public Move makeMove(Board board);
 }

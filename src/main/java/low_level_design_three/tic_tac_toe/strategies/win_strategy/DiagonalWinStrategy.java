@@ -1,8 +1,6 @@
 package low_level_design_three.tic_tac_toe.strategies.win_strategy;
 
-import low_level_design_three.tic_tac_toe.model.Cell;
-import low_level_design_three.tic_tac_toe.model.Game;
-import low_level_design_three.tic_tac_toe.model.Symbol;
+import low_level_design_three.tic_tac_toe.model.*;
 
 import java.util.HashSet;
 import java.util.List;
@@ -10,7 +8,7 @@ import java.util.Set;
 
 public class DiagonalWinStrategy implements WinStrategy {
     @Override
-    public boolean checkWinner(Game game) {
+    public boolean checkWinner(Board board, Move move) {
         List<List<Cell>> grid = game.getBoard().getGrid();
         Cell currentCell = game.getMoves().getLast().getCell();
         int currentRow = currentCell.getRow();

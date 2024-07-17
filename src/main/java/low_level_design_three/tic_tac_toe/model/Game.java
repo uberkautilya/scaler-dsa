@@ -92,6 +92,59 @@ public class Game {
         board.display();
     }
 
+    public void makeMove() {
+        // get current player
+        Player currentPlayer = players.get(nextPlayerIndex);
+        System.out.println("It's " + currentPlayer.getName() + "'s turn. Make a move.!");
+
+        Move currentMove = currentPlayer.makeMove(board);
+        if (!isValidMove(currentMove)) {
+            System.out.println("Invalid move. Try again.!");
+        }
+        int row = currentMove.getCell().getRow();
+        int col = currentMove.getCell().getCol();
+
+        Cell currentCell = board.getGrid().get(row).get(col);
+        currentCell.setCellState(CellState.FILLED);
+        currentCell.setSymbol(currentPlayer.getSymbol());
+
+        currentMove.setCell(currentCell);
+        currentMove.setPlayer(currentPlayer);
+        moves.add(currentMove);
+
+        nextPlayerIndex++;
+        nextPlayerIndex %= players.size();
+        if (checkWinner(currentMove)) {
+            setWinner(currentPlayer);
+            setGameState(GameState.SUCCESS);
+        }
+    }
+
+    private boolean isValidMove(Move move) {
+        int row = move.getCell().getRow();
+        int col = move.getCell().getCol();
+
+        if (row < 0 || row > board.getDimension() - 1 ||
+                col < 0 || col > board.getDimension() - 1) {
+            return false;
+        }
+        Cell cell = board.getGrid().get(row).get(col);
+        return cell.getCellState().equals(CellState.EMPTY);
+    }
+
+    public void undo() {
+        if (!moves.isEmpty()) {
+            Cell cell = moves.getLast().getCell();
+            cell.setCellState(CellState.EMPTY);
+            cell.setSymbol(null);
+            nextPlayerIndex = (nextPlayerIndex + players.size()) % players.size();
+            moves.removeLast();
+            setGameState(GameState.IN_PROGRESS);
+            setWinner(null);
+            //If the strategy was implemented with a HashMap, we would need to undo the modifications as well - could have handleUndo(Board board, Move move);
+        }
+    }
+
     public static class Builder {
         private int dimension;
         private List<Player> players;

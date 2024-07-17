@@ -26,16 +26,8 @@ public class GameController {
                 .build();
     }
 
-    public GameState checkGameState(Game game) {
-        boolean isWon = game.getWinStrategies().stream().anyMatch(winStrategy -> winStrategy.checkWinner(game));
-        if (isWon) {
-            return GameState.SUCCESS;
-        }
-        boolean isFilled = game.getBoard().isFilled();
-        if (isFilled) {
-            return GameState.DRAW;
-        }
-        return GameState.IN_PROGRESS;
+    public GameState getGameState(Game game) {
+        return game.getGameState();
     }
 
     public void display(Game game) {
@@ -43,7 +35,7 @@ public class GameController {
     }
 
     public void makeMove(Game game) {
-
+        game.makeMove();
     }
 
     public Player getWinner(Game game) {
@@ -51,7 +43,7 @@ public class GameController {
     }
 
     public void undo(Game game) {
-
+        game.undo();
     }
 }
 
