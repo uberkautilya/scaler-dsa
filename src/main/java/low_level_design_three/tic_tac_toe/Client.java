@@ -1,8 +1,8 @@
 package low_level_design_three.tic_tac_toe;
 
 import low_level_design_three.tic_tac_toe.controller.GameController;
-import low_level_design_three.tic_tac_toe.models.*;
-import low_level_design_three.tic_tac_toe.strategies.winning.RowWinnerStrategy;
+import low_level_design_three.tic_tac_toe.model.*;
+import low_level_design_three.tic_tac_toe.strategies.win_strategy.RowWinStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +18,9 @@ public class Client {
         GameController controller = new GameController();
         List<Player> playerList = new ArrayList<>();
         playerList.add(new HumanPlayer(1, "Mithun", PlayerType.HUMAN, new Symbol('0')));
-        playerList.add(new Bot(1, "Bot101", PlayerType.BOT, new Symbol('B'), BotDifficulty.EASY));
+        playerList.add(new BotPlayer(1, "Bot101", PlayerType.BOT, new Symbol('B'), BotDifficulty.EASY));
 
-        Game game = controller.startGame(3, playerList, List.of(new RowWinnerStrategy()));
+        Game game = controller.startGame(3, playerList, List.of(new RowWinStrategy()));
 
         while (controller.checkGameState(game).equals(GameState.IN_PROGRESS)) {
             controller.display(game);

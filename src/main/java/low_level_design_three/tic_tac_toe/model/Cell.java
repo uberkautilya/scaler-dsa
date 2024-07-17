@@ -1,4 +1,4 @@
-package low_level_design_three.tic_tac_toe.models;
+package low_level_design_three.tic_tac_toe.model;
 
 public class Cell {
     private int row;
@@ -10,7 +10,7 @@ public class Cell {
         this.row = row;
         this.col = col;
         this.cellState = CellState.EMPTY;
-        this.symbol = new Symbol();
+        this.symbol = null;
     }
 
     public int getRow() {

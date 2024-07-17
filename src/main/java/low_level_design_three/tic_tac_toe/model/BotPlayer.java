@@ -1,9 +1,9 @@
-package low_level_design_three.tic_tac_toe.models;
+package low_level_design_three.tic_tac_toe.model;
 
-public class Bot extends Player{
+public class BotPlayer extends Player{
     private BotDifficulty botDifficulty;
 
-    public Bot(int id, String name, PlayerType playerType, Symbol symbol, BotDifficulty botDifficulty) {
+    public BotPlayer(int id, String name, PlayerType playerType, Symbol symbol, BotDifficulty botDifficulty) {
         super(id, name, playerType, symbol);
         this.botDifficulty = botDifficulty;
     }

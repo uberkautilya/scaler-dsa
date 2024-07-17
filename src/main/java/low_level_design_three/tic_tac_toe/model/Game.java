@@ -1,7 +1,8 @@
-package low_level_design_three.tic_tac_toe.models;
+package low_level_design_three.tic_tac_toe.model;
 
-import low_level_design_three.tic_tac_toe.strategies.winning.WinningStrategy;
+import low_level_design_three.tic_tac_toe.strategies.win_strategy.WinStrategy;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,12 +14,16 @@ public class Game {
     private int nextPlayerIndex;
     private List<Move> moves;
     private GameState gameState;
-    private List<WinningStrategy> winningStrategies;
+    private List<WinStrategy> winStrategies;
 
     private Game(Builder builder) {
-        board = new Board(builder.getDimension());
-        players = builder.getPlayer();
-
+        board = new Board(builder.dimension);
+        players = builder.players;
+        winStrategies = builder.winStrategies;
+        winner = null;
+        nextPlayerIndex = 0;
+        moves = new ArrayList<>();
+        gameState = GameState.IN_PROGRESS;
     }
 
 
@@ -70,12 +75,12 @@ public class Game {
         this.gameState = gameState;
     }
 
-    public List<WinningStrategy> getWinningStrategies() {
-        return winningStrategies;
+    public List<WinStrategy> getWinStrategies() {
+        return winStrategies;
     }
 
-    public void setWinningStrategies(List<WinningStrategy> winningStrategies) {
-        this.winningStrategies = winningStrategies;
+    public void setWinStrategies(List<WinStrategy> winStrategies) {
+        this.winStrategies = winStrategies;
     }
 
     public static Builder getBuilder() {
@@ -90,7 +95,7 @@ public class Game {
     public static class Builder {
         private int dimension;
         private List<Player> players;
-        private List<WinningStrategy> winStrategies;
+        private List<WinStrategy> winStrategies;
 
         public Builder setDimension(int dimension) {
             this.dimension = dimension;
@@ -102,7 +107,7 @@ public class Game {
             return this;
         }
 
-        public Builder setWinStrategies(List<WinningStrategy> winStrategies) {
+        public Builder setWinStrategies(List<WinStrategy> winStrategies) {
             this.winStrategies = winStrategies;
             return this;
         }

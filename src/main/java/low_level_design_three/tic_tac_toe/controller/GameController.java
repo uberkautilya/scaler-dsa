@@ -1,9 +1,9 @@
 package low_level_design_three.tic_tac_toe.controller;
 
-import low_level_design_three.tic_tac_toe.models.Game;
-import low_level_design_three.tic_tac_toe.models.GameState;
-import low_level_design_three.tic_tac_toe.models.Player;
-import low_level_design_three.tic_tac_toe.strategies.winning.WinningStrategy;
+import low_level_design_three.tic_tac_toe.model.Game;
+import low_level_design_three.tic_tac_toe.model.GameState;
+import low_level_design_three.tic_tac_toe.model.Player;
+import low_level_design_three.tic_tac_toe.strategies.win_strategy.WinStrategy;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class GameController {
 
     public Game startGame(int dimension,
                           List<Player> players,
-                          List<WinningStrategy> winStrategies) {
+                          List<WinStrategy> winStrategies) {
         /*
         Validate Before starting a game:
         1. Check the player count. It needs to be equal to dimension-1.
@@ -27,7 +27,15 @@ public class GameController {
     }
 
     public GameState checkGameState(Game game) {
-        return null;
+        boolean isWon = game.getWinStrategies().stream().anyMatch(winStrategy -> winStrategy.checkWinner(game));
+        if (isWon) {
+            return GameState.SUCCESS;
+        }
+        boolean isFilled = game.getBoard().isFilled();
+        if (isFilled) {
+            return GameState.DRAW;
+        }
+        return GameState.IN_PROGRESS;
     }
 
     public void display(Game game) {
