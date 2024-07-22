@@ -9,8 +9,8 @@ import java.util.Set;
 public class CornerWinStrategy implements WinStrategy {
     @Override
     public boolean checkWinner(Board board, Move move) {
-        List<List<Cell>> grid = game.getBoard().getGrid();
-        Cell currentCell = game.getMoves().getLast().getCell();
+        List<List<Cell>> grid = board.getGrid();
+        Cell currentCell = move.getCell();
         int row = currentCell.getRow();
         int col = currentCell.getCol();
 

@@ -9,8 +9,8 @@ import java.util.Set;
 public class DiagonalWinStrategy implements WinStrategy {
     @Override
     public boolean checkWinner(Board board, Move move) {
-        List<List<Cell>> grid = game.getBoard().getGrid();
-        Cell currentCell = game.getMoves().getLast().getCell();
+        List<List<Cell>> grid = board.getGrid();
+        Cell currentCell = move.getCell();
         int currentRow = currentCell.getRow();
         int currentCol = currentCell.getCol();
 

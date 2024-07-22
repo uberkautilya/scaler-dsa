@@ -15,4 +15,9 @@ public class BotPlayer extends Player{
     public void setBotDifficulty(BotDifficulty botDifficulty) {
         this.botDifficulty = botDifficulty;
     }
+
+    @Override
+    public Move makeMove(Board board) {
+        return null;
+    }
 }

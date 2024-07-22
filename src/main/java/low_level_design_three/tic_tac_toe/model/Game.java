@@ -120,6 +120,10 @@ public class Game {
         }
     }
 
+    private boolean checkWinner(Move currentMove) {
+        return false;
+    }
+
     private boolean isValidMove(Move move) {
         int row = move.getCell().getRow();
         int col = move.getCell().getCol();
