@@ -1,10 +1,10 @@
 package low_level_design_three.parking_lot.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class EntryTicket extends BaseModel {
     Gate gate;
-    LocalDateTime entryTime;
+    Date entryTime;
     //The operator who issued this ticket, not the one currently referred in the Gate object above
     Operator operator;
     ParkingSlot slotAllotted;
@@ -18,11 +18,11 @@ public class EntryTicket extends BaseModel {
         this.gate = gate;
     }
 
-    public LocalDateTime getEntryTime() {
+    public Date getEntryTime() {
         return entryTime;
     }
 
-    public void setEntryTime(LocalDateTime entryTime) {
+    public void setEntryTime(Date entryTime) {
         this.entryTime = entryTime;
     }
 
