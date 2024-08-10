@@ -51,7 +51,7 @@ public class CollectionsExample {
         //Queue: Implements Deque - Doubly ended Queue, along with List
         //Deque has an array implementation as well: ArrayDeque
         Queue<Integer> linkedListQueue = new LinkedList<>();
-        //The other implementation which can have any ordering - is a Heap
+        //The other implementation that can have any ordering - is a Heap
         Queue<Integer> priorityQueue = new PriorityQueue<>();
         priorityQueue.add(23);
         priorityQueue.add(5);
@@ -76,7 +76,7 @@ public class CollectionsExample {
         HashTable is the thread-safe alternative to HashMap
         However it blocks every other function when a method is executing
         Alternative optimized version is the ConcurrentHashMap - has partitions
-        ConcurrentHashMap - separate segments/ buckets the single hashmap
+        ConcurrentHashMap - separate segments/ buckets within the single hashmap
         Updates/ Writes block only that bucket. Reads does not take any lock - performant
         */
 
