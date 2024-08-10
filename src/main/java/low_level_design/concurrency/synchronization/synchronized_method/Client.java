@@ -10,21 +10,22 @@ import java.util.concurrent.Future;
  */
 public class Client {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        ExecutorService executorService = Executors.newCachedThreadPool();
 
-        Value v = new Value(0);
+        try (ExecutorService executorService = Executors.newCachedThreadPool()) {
+            Value v = new Value(0);
 
-        AddCallable addCallable = new AddCallable(v);
-        SubtractCallable subtractCallable = new SubtractCallable(v);
+            AddCallable addCallable = new AddCallable(v);
+            SubtractCallable subtractCallable = new SubtractCallable(v);
 
-        Future<Void> subtractFuture = executorService.submit(subtractCallable);
-        Future<Void> addFuture = executorService.submit(addCallable);
+            Future<Void> subtractFuture = executorService.submit(subtractCallable);
+            Future<Void> addFuture = executorService.submit(addCallable);
 
-        subtractFuture.get();
-        addFuture.get();
+            subtractFuture.get();
+            addFuture.get();
 
-        System.out.println("Value.x = " + Value.getStaticVal());
-        System.out.println("v.value = " + v.value);
-        executorService.shutdown();
+            System.out.println("Value.x = " + Value.getStaticVal());
+            System.out.println("v.value = " + v.value);
+            executorService.shutdown();
+        }
     }
 }

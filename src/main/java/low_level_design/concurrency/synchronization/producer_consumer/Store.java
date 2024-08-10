@@ -11,21 +11,21 @@ public class Store {
         this.maxSize = maxSize;
     }
 
+    public boolean isAdditionPossible() {
+        return list.size() < maxSize;
+    }
+
     public void addItem() {
         System.out.println("Producer: Items size: " + list.size());
         this.list.add(new Object());
-    }
-
-    public void removeItem() {
-        System.out.println("Consumer: Removing item at index: " + (list.size() - 1));
-        this.list.remove(this.list.size() - 1);
     }
 
     public boolean isEmpty() {
         return list.isEmpty();
     }
 
-    public boolean isAdditionPossible() {
-        return list.size() < maxSize;
+    public void removeItem() {
+        System.out.println("Consumer: Removing item at index: " + (list.size() - 1));
+        this.list.remove(this.list.size() - 1);
     }
 }

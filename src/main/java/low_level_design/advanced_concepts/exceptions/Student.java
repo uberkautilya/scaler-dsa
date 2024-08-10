@@ -22,7 +22,7 @@ public class Student {
         return 100/0;
     }
 
-    public static String throwCustomCheckedException() throws StudentNotFoundException {
+    public static void throwCustomCheckedException() throws StudentNotFoundException {
         throw new StudentNotFoundException("Some Text");
     }
 }

@@ -15,6 +15,7 @@ public class ProducerRunnable implements Runnable {
 
     @Override
     public void run() {
+        //noinspection InfiniteLoopStatement
         while (true) {
             try {
                 producerSemaphore.acquire();

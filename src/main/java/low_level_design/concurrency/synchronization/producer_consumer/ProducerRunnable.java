@@ -9,6 +9,7 @@ public class ProducerRunnable implements Runnable {
 
     @Override
     public void run() {
+        //noinspection InfiniteLoopStatement
         while (true) {
             synchronized (store) {
                 if (store.isAdditionPossible()) {

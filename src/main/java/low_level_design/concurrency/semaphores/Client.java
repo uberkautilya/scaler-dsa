@@ -12,18 +12,19 @@ public class Client {
          * To preserve earlier behavior, use Concurrent friendly data structures like {@code ConcurrentLinkedQueue<Object>()}, or bring back the list.size() checks.
          */
         public static void main(String[] args) {
-        ExecutorService executorService = Executors.newCachedThreadPool();
+            try (ExecutorService executorService = Executors.newCachedThreadPool()) {
 
-        Semaphore producerSemaphore = new Semaphore(5);
-        Semaphore consumerSemaphore = new Semaphore(0);
-        Store store = new Store(5);
+                Semaphore producerSemaphore = new Semaphore(5);
+                Semaphore consumerSemaphore = new Semaphore(0);
+                Store store = new Store(5);
 
-        for (int i = 0; i < 25; i++) {
-            executorService.execute(new ConsumerRunnable(store, producerSemaphore, consumerSemaphore));
+                for (int i = 0; i < 25; i++) {
+                    executorService.execute(new ConsumerRunnable(store, producerSemaphore, consumerSemaphore));
+                }
+
+                for (int i = 0; i < 10; i++) {
+                    executorService.execute(new ProducerRunnable(store, producerSemaphore, consumerSemaphore));
+                }
+            }
         }
-
-        for (int i = 0; i < 10; i++) {
-            executorService.execute(new ProducerRunnable(store, producerSemaphore, consumerSemaphore));
-        }
-    }
 }

@@ -32,9 +32,15 @@ public class Client {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
-
+        int i = 10;
         try {
-            throw new C("Exception C creation");
+            if (i == 0) {
+                throw new C("Exception C creation");
+            } else if (i == 1) {
+                throw new B("Exception B creation");
+            } else {
+                throw new A("Exception A creation");
+            }
         } catch (C c) {
             //Order should be child to be parent
             System.out.println("C is caught");

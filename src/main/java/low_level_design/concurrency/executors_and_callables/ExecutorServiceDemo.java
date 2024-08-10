@@ -10,25 +10,31 @@ public class ExecutorServiceDemo {
         cachedPoolExample();
     }
 
+    /**
+     * On demand thread creation - If no thread is free, a new thread is spawned
+     * Only use newCachedThreadPool when the tasks are limited - when no chance of huge number of threads exists
+     */
     private static void cachedPoolExample() {
-        // On demand thread creation - If no thread is free, a new thread is spawned
-        // Only use newCachedThreadPool when the tasks are limited - when no chance of huge number of threads exists
-        ExecutorService eS = Executors.newCachedThreadPool();
-        for (int i = 0; i < 15000; i++) {
-            Runnable runnable = new RunnableImpl(i);
-            eS.execute(runnable);
+        try (ExecutorService eS = Executors.newCachedThreadPool()) {
+            for (int i = 0; i < 15000; i++) {
+                Runnable runnable = new RunnableImpl(i);
+                eS.execute(runnable);
+            }
         }
     }
 
+    /**
+     * 10 Threads created
+     */
     private static void fixedThreadPoolExample() {
-        // 10 Threads created
-        ExecutorService executorService = Executors.newFixedThreadPool(16);
+        try (ExecutorService executorService = Executors.newFixedThreadPool(10)) {
 
-        for (int i = 0; i < 150000; i++) {
-            RunnableImpl runnable = new RunnableImpl(i);
-            executorService.execute(runnable);
+            for (int i = 0; i < 150000; i++) {
+                RunnableImpl runnable = new RunnableImpl(i);
+                executorService.execute(runnable);
+            }
+            // Will auto shutdown anyway, even when not called
+            executorService.shutdown();
         }
-        // Will auto shutdown anyway, even when not called
-        executorService.shutdown();
     }
 }

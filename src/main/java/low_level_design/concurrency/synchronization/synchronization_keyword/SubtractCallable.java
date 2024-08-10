@@ -4,7 +4,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.locks.Lock;
 
 public class SubtractCallable implements Callable<Integer> {
-    private Value v;
+    private final Value v;
 
     public SubtractCallable(Value v) {
         this.v = v;

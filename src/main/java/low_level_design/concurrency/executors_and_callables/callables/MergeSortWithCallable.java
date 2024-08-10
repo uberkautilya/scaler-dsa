@@ -9,11 +9,13 @@ import java.util.concurrent.Future;
 
 public class MergeSortWithCallable {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        ExecutorService executorService = Executors.newCachedThreadPool();
-        List<Integer> listToSort = Arrays.asList(2, 11, 9, 7, 4, 8, 18, 10);
-        Sorter sorter = new Sorter(listToSort, executorService);
+        List<Integer> unsortedList = Arrays.asList(2, 11, 9, 7, 4, 8, 18, 10);
 
-        Future<List<Integer>> sortedList = executorService.submit(sorter);
+        ExecutorService executorService = Executors.newCachedThreadPool();
+
+        CallableSort sortTask = new CallableSort(unsortedList, executorService);
+        Future<List<Integer>> sortedList = executorService.submit(sortTask);
+
         System.out.println("sortedList.get() = " + sortedList.get());
     }
 }

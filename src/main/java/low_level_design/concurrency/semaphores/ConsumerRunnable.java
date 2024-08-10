@@ -15,6 +15,7 @@ public class ConsumerRunnable implements Runnable{
 
     @Override
     public void run() {
+        //noinspection InfiniteLoopStatement
         while (true) {
             try {
                 consumerSemaphore.acquire();

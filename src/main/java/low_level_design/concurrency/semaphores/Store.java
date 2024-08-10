@@ -4,7 +4,7 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Store {
-    int maxSize;
+    final int maxSize;
     //As we allow multiple threads simultaneously to operate on the collection
     Queue<Object> queue = new ConcurrentLinkedQueue<>();
 

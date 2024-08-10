@@ -5,15 +5,17 @@ import java.util.concurrent.Executors;
 
 public class Client {
     public static void main(String[] args) {
-        ExecutorService executorService = Executors.newCachedThreadPool();
-        Store store = new Store(5);
 
-        for (int i = 0; i < 25; i++) {
-            executorService.execute(new ConsumerRunnable(store));
-        }
+        try (ExecutorService executorService = Executors.newCachedThreadPool()) {
+            Store store = new Store(5);
 
-        for (int i = 0; i < 10; i++) {
-            executorService.execute(new ProducerRunnable(store));
+            for (int i = 0; i < 25; i++) {
+                executorService.execute(new ConsumerRunnable(store));
+            }
+
+            for (int i = 0; i < 10; i++) {
+                executorService.execute(new ProducerRunnable(store));
+            }
         }
     }
 }

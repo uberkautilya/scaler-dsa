@@ -9,24 +9,26 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Client {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        ExecutorService executorService = Executors.newCachedThreadPool();
 
-        Value v = new Value(0);
-        Lock lock = new ReentrantLock();
+        try (ExecutorService executorService = Executors.newCachedThreadPool()) {
+            Value v = new Value(0);
+            Lock lock = new ReentrantLock();
 
-        AddCallable addCallable = new AddCallable(v, lock);
-        SubtractCallable subtractCallable = new SubtractCallable(v, lock);
+            AddCallable addCallable = new AddCallable(v, lock);
+            SubtractCallable subtractCallable = new SubtractCallable(v, lock);
 
-        Future<Integer> subtractFuture = executorService.submit(subtractCallable);
-        Future<Integer> addFuture = executorService.submit(addCallable);
+            Future<Integer> subtractFuture = executorService.submit(subtractCallable);
+            Future<Integer> addFuture = executorService.submit(addCallable);
 
-        Integer subtractResult = subtractFuture.get();
-        System.out.println("subtractResult = " + subtractResult);
+            //Depending on how many additions and subtractions are done, the subtractResult and addResult value can vary
+            Integer subtractResult = subtractFuture.get();
+            System.out.println("subtractResult = " + subtractResult);
 
-        Integer addResult = addFuture.get();
-        System.out.println("addResult = " + addResult);
+            Integer addResult = addFuture.get();
+            System.out.println("addResult = " + addResult);
 
-        System.out.println("v.value = " + v.value);
-        executorService.shutdown();
+            System.out.println("v.value = " + v.value);
+            executorService.shutdown();
+        }
     }
 }
