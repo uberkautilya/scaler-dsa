@@ -13,13 +13,13 @@ public class Store {
     }
 
     public void addItem() {
-        System.out.println("Producer: Items size: " + queue.size());
         this.queue.add(new Object());
+        System.out.println("Producer: Items size: " + queue.size());
     }
 
     public void removeItem() {
-        System.out.println("Consumer: Removing item at index: " + (queue.size() - 1));
-        this.queue.remove(this.queue.size() - 1);
+        this.queue.remove();
+        System.out.println("Consumer: Items size: " + queue.size());
     }
 
     public boolean isEmpty() {

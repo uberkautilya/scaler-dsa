@@ -1,5 +1,8 @@
 package low_level_design.concurrency.semaphores;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
@@ -13,18 +16,13 @@ public class Client {
          */
         public static void main(String[] args) {
             try (ExecutorService executorService = Executors.newCachedThreadPool()) {
+                Store store = new Store(5);
 
                 Semaphore producerSemaphore = new Semaphore(5);
                 Semaphore consumerSemaphore = new Semaphore(0);
-                Store store = new Store(5);
 
-                for (int i = 0; i < 25; i++) {
-                    executorService.execute(new ConsumerRunnable(store, producerSemaphore, consumerSemaphore));
-                }
-
-                for (int i = 0; i < 10; i++) {
-                    executorService.execute(new ProducerRunnable(store, producerSemaphore, consumerSemaphore));
-                }
+                executorService.execute(new ConsumerRunnable(store, producerSemaphore, consumerSemaphore));
+                executorService.execute(new ProducerRunnable(store, producerSemaphore, consumerSemaphore));
             }
         }
 }
