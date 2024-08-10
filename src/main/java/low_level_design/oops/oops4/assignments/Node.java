@@ -30,7 +30,7 @@ class NodeIterator implements Iterator<Node> {
 
     @Override
     public boolean hasNext() {
-        return head == null;
+        return head != null;
     }
 
     @Override
