@@ -14,17 +14,17 @@ public class FooBar {
     }
 
     public void foo() throws InterruptedException {
-        fooSemaphore.acquire();
         for (int i = 0; i < n; i++) {
+            fooSemaphore.acquire();
             System.out.print("foo");
+            barSemaphore.release();
         }
-        barSemaphore.release();
     }
     public void bar() throws InterruptedException {
-        barSemaphore.acquire();
         for (int i = 0; i < n; i++) {
-            System.out.print("bar");
+            barSemaphore.acquire();
+            System.out.print("bar ");
+            fooSemaphore.release();
         }
-        fooSemaphore.release();
     }
 }

@@ -16,7 +16,7 @@ public class Client {
          */
         public static void main(String[] args) {
             try (ExecutorService executorService = Executors.newCachedThreadPool()) {
-                Store store = new Store(5);
+                Store store = new Store();
 
                 Semaphore producerSemaphore = new Semaphore(5);
                 Semaphore consumerSemaphore = new Semaphore(0);
