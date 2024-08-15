@@ -14,7 +14,10 @@ public class MinHeap {
 
         while (index > 0) {
             int parentIndex = (index - 1) / 2;
-            if (minHeap.get(parentIndex) > minHeap.get(index)) {
+            Integer parentElement = minHeap.get(parentIndex);
+            Integer currentElement = minHeap.get(index);
+
+            if (parentElement > currentElement) {
                 swap(minHeap, parentIndex, index);
                 index = parentIndex;
             } else {
@@ -32,31 +35,31 @@ public class MinHeap {
         minHeap.set(0, minHeap.get(size - 1));
         //Once the min element is removed from the heap, size -> size - 1
         size--;
-        int i = 0;
+        int index = 0;
 
-        while (i < size) {
+        while (index < size) {
             //Index holding the left child element of current node
-            int lcIndex = 2 * i + 1;
-            int rcIndex = 2 * i + 2;
+            int lChildIndex = 2 * index + 1;
+            int rChildIndex = 2 * index + 2;
 
-            Integer ithElement = minHeap.get(i);
-            Integer leftChild = minHeap.get(lcIndex);
-            Integer rightChild = minHeap.get(rcIndex);
+            Integer currentElement = minHeap.get(index);
+            Integer leftChild = minHeap.get(lChildIndex);
+            Integer rightChild = minHeap.get(rChildIndex);
 
-            if (rcIndex < size) {
-                // rcIndex exists
-                if (leftChild <= ithElement && leftChild <= rightChild) {
-                    swap(minHeap, lcIndex, i);
-                    i = lcIndex;
-                } else if (rightChild <= ithElement && rightChild <= leftChild) {
-                    swap(minHeap, rcIndex, i);
-                    i = rcIndex;
+            if (rChildIndex < size) {
+                // rChildIndex exists
+                if (leftChild <= currentElement && leftChild <= rightChild) {
+                    swap(minHeap, lChildIndex, index);
+                    index = lChildIndex;
+                } else if (rightChild <= currentElement && rightChild <= leftChild) {
+                    swap(minHeap, rChildIndex, index);
+                    index = rChildIndex;
                 }
-            } else if (lcIndex < size) {
-                // rcIndex is out of bounds
-                if (leftChild <= ithElement) {
-                    swap(minHeap, lcIndex, i);
-                    i = lcIndex;
+            } else if (lChildIndex < size) {
+                // rChildIndex is out of bounds
+                if (leftChild <= currentElement) {
+                    swap(minHeap, lChildIndex, index);
+                    index = lChildIndex;
                 }
             } else {
                 break;
