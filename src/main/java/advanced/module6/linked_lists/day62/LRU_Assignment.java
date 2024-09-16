@@ -62,15 +62,14 @@ public class LRU_Assignment {
         } else {
             node = new Node(key, value);
             map.put(key, node);
-        }
-
-        setHead(node);
-        if (map.size() > capacity) {
-            if (!keyExists) {
+            //If the size exceeds the capacity, remove the tail node
+            if (map.size() > capacity) {
                 map.remove(tail.key);
+                removeTail();
             }
-            removeTail();
         }
+        //Add the node at the head position
+        setHead(node);
     }
 
     public Integer get(Integer key) {
