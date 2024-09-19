@@ -3,7 +3,7 @@ package advanced.module4.dsa36_sep06;
 import java.util.Arrays;
 import java.util.List;
 
-public class ElemenetNotThrice {
+public class ElementNotThrice {
     public static void main(String[] args) {
         List<Integer> numbers = Arrays.asList(2, 3, 2, 3, 2, 3, 6, 7, 6, 6);
         Integer element = solve(numbers);

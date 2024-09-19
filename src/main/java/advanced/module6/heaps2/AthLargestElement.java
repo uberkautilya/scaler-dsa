@@ -16,7 +16,7 @@ public class AthLargestElement {
         List<Integer> intList = Arrays.asList(15, 20, 99, 1);
 //        int A = 4;
         int A = 2;
-        int[] result = solve(A, intList.stream().mapToInt(Integer::intValue).toArray());
+        int[] result = solve(A, new int[]{15, 20, 99, 1});
         System.out.println("result = " + Arrays.toString(result));
     }
 
@@ -24,24 +24,26 @@ public class AthLargestElement {
         int[] result = new int[B.length];
         Arrays.fill(result, -1);
         //Create min heap to hold the A largest numbers
-        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
         for (int i = 0; i < B.length && i < A; i++) {
-            priorityQueue.add(B[i]);
+            minHeap.add(B[i]);
         }
-        // For Ath element, which is at index A-1, get the min element from the PQ, as Ath min is present at top
-        if (null != priorityQueue.peek()) {
-            result[A-1] = priorityQueue.peek();
+        // For getting result for index A-1 (i.e., B[A-1]), get the top element from the minHeap
+        // At a given time, minHeap holds the 'A' largest elements
+        if (null != minHeap.peek()) {
+            result[A-1] = minHeap.peek();
         }
 
         for (int i = A; i < B.length; i++) {
-            if (null == priorityQueue.peek()) {
+            if (null == minHeap.peek()) {
                 break;
             }
-            if (priorityQueue.peek() < B[i]) {
-                priorityQueue.remove();
-                priorityQueue.add(B[i]);
+            // At a given time, minHeap holds the 'A' largest elements
+            if (B[i] > minHeap.peek()) {
+                minHeap.remove();
+                minHeap.add(B[i]);
             }
-            result[i] = priorityQueue.peek();
+            result[i] = minHeap.peek();
         }
         return result;
     }
