@@ -5,32 +5,63 @@ import java.util.Arrays;
 
 /**
  * Implement the next permutation, which rearranges numbers into the numerically next greater permutation of numbers for a given array A of size N.
- * <p>
  * If such arrangement is not possible, it must be rearranged as the lowest possible order, i.e., sorted in ascending order.
+ * NOTE:
+ * The replacement must be in-place, do not allocate extra memory.
+ * DO NOT USE LIBRARY FUNCTION FOR NEXT PERMUTATION. Use of Library functions will disqualify your submission retroactively and will give you penalty points.
  */
 public class NextPermutation {
 
     public static void main(String[] args) {
         NextPermutation nextPermutation = new NextPermutation();
         ArrayList<Integer> result = nextPermutation.nextPermutation(new ArrayList<>(Arrays.asList(
-                7, 3, 4, 5, 2, 1, 3, 3, 1
+                73, 4, 52, 13, 1, 3
+//                73, 4, 52, 13, 3, 1
         )));
         System.out.println("result = " + result);
 
     }
 
     public ArrayList<Integer> nextPermutation(ArrayList<Integer> A) {
-        //734521313 -> Start from the rightmost element. The first element less than it should be swapped
-        for (int j = 1; j < A.size() - 1; j++) {
-
-            for (int i = A.size() - 1; i > 0 && i - j >= 0; i--) {
-                if (A.get(i - j).toString().compareTo(A.get(i).toString()) < 0) {
-                    swap(A, i - j, i);
-                    sort(A, i - j + 1, A.size() - 1);
-                    return A;
-                }
+        //73,4,52,131,3 -> Iterate from right, find the first number which is less than the previous value.
+        // Swap this number with a value on its right that is closest and larger.
+        // Thereafter arrange all the numbers on the right of the number found in ascending order
+        int indexToSwap1 = A.size() - 2;
+        while (indexToSwap1 >= 0) {
+            Integer val1 = A.get(indexToSwap1);
+            Integer val2 = A.get(indexToSwap1 + 1);
+            if (val1 < val2) {
+                break;
             }
+            indexToSwap1--;
         }
+        //If A is fully in descending order, make the whole list ascending
+        if (indexToSwap1 == -1) {
+            for (int i = 0; i < A.size() / 2; i++) {
+                swap(A, i, A.size() - i - 1);
+            }
+            return A;
+        }
+        int lastIndex = A.size() - 1;
+        int indexToSwap2 = lastIndex;
+        while (indexToSwap2 >= indexToSwap1) {
+            if (A.get(indexToSwap2) > A.get(indexToSwap1)) {
+                break;
+            }
+            indexToSwap2--;
+        }
+
+        System.out.println(Arrays.toString(A.toArray()));
+        System.out.println("IndexToSwap1 = " + indexToSwap1);
+        System.out.println("IndexToSwap2 = " + indexToSwap2);
+        swap(A, indexToSwap1, indexToSwap2);
+
+        int startIndex = indexToSwap1 + 1;
+        int midIndex = (startIndex + lastIndex) / 2;
+        for (int i = startIndex, j = lastIndex; i <= midIndex; i++, j--) {
+            swap(A, i, j);
+        }
+
         return A;
     }
 
@@ -38,10 +69,6 @@ public class NextPermutation {
         int temp = list.get(index1);
         list.set(index1, list.get(index2));
         list.set(index2, temp);
-    }
-
-    void sort(ArrayList<Integer> list, int startIndex, int endIndex) {
-//        l
     }
 }
 
