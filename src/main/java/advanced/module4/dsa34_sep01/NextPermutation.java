@@ -25,7 +25,7 @@ public class NextPermutation {
     public ArrayList<Integer> nextPermutation(ArrayList<Integer> A) {
         //73,4,52,131,3 -> Iterate from right, find the first number which is less than the previous value.
         // Swap this number with a value on its right that is closest and larger.
-        // Thereafter arrange all the numbers on the right of the number found in ascending order
+        // Thereafter, arrange all the numbers on the right of the number found in ascending order
         int indexToSwap1 = A.size() - 2;
         while (indexToSwap1 >= 0) {
             Integer val1 = A.get(indexToSwap1);
