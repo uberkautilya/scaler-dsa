@@ -13,11 +13,11 @@ public class InversionCountWithList {
         System.out.println("inversionPairCount = " + inversionPairCount);
     }
 
-    int c = 0;
+    int count = 0;
 
     public int solve(ArrayList<Integer> A) {
         mergeSort(A, 0, A.size() - 1);
-        return c % 1000_000_007;
+        return count % 1000_000_007;
     }
 
     private void mergeSort(ArrayList<Integer> ar, int l, int h) {
@@ -30,37 +30,37 @@ public class InversionCountWithList {
         merge(ar, l, m, h);
     }
 
-    private void merge(ArrayList<Integer> ar, int l, int m, int h) {
-        int[] tmp = new int[h - l + 1];
-        int p1 = l;
-        int p2 = m + 1;
-        int p = 0;
+    private void merge(ArrayList<Integer> ar, int lIndex, int mIndex, int hIndex) {
+        int[] tmp = new int[hIndex - lIndex + 1];
+        int p1 = lIndex;
+        int p2 = mIndex + 1;
+        int index = 0;
 
-        while (p1 <= m && p2 <= h) {
+        while (p1 <= mIndex && p2 <= hIndex) {
             if (ar.get(p1) <= ar.get(p2)) {
-                tmp[p] = ar.get(p1);
+                tmp[index] = ar.get(p1);
                 p1++;
             } else {
-                c += m - p1 + 1;
-                c = c % 1000_000_007;
-                tmp[p] = ar.get(p2);
+                count += mIndex - p1 + 1;
+                count = count % 1000_000_007;
+                tmp[index] = ar.get(p2);
                 p2++;
             }
-            p++;
+            index++;
         }
 
-        while (p1 <= m) {
-            tmp[p] = ar.get(p1);
+        while (p1 <= mIndex) {
+            tmp[index] = ar.get(p1);
             p1++;
-            p++;
+            index++;
         }
-        while (p2 <= h) {
-            tmp[p] = ar.get(p2);
+        while (p2 <= hIndex) {
+            tmp[index] = ar.get(p2);
             p2++;
-            p++;
+            index++;
         }
-        for (int i = l; i <= h; i++) {
-            ar.set(i, tmp[i - l]);
+        for (int i = lIndex; i <= hIndex; i++) {
+            ar.set(i, tmp[i - lIndex]);
         }
     }
 }
