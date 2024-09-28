@@ -11,8 +11,9 @@ public class CustomList implements Iterable<Integer> {
     @Override
     public Iterator<Integer> iterator() {
         //Iterator returning only even numbers from the list
-        return new Iterator<Integer>() {
+        return new Iterator<>() {
             int index = 0;
+
             @Override
             public boolean hasNext() {
                 while (index < integerList.size()) {
