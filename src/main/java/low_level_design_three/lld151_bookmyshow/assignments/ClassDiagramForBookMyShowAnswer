@@ -1,0 +1,64 @@
+City
+- id: Long
+- location: String
+- theatres: List<Theatre>
+
+Theatre
+- id: Long
+- name: String
+- screens: List<Screen>
+
+Screen
+- id: Long
+- seats: List<Seat>
+- features: List<Feature>
+
+enum SeatType
+PLATINUM, GOLD, SILVER
+
+Show
+- id: Long
+- name: Movie
+- screen: Screen
+- startTime: Timestamp
+- endTime: Timestamp
+- feature: List<Feature>
+
+Seat
+- id: Long
+- seatType: SeatType
+- row: Integer
+- col: Integer
+
+ShowSeat
+- id: Long
+- show: Show
+- seat: Seat
+- price: Double
+
+Movie
+- id: Long
+- name: String
+- features: List<Feature>
+
+enum Feature
+2D, 3D, DOLBY_IMAX, DOLBY_VISION
+
+Ticket
+- id: Long
+- amount: Double
+- status: TicketStatus
+- seats: List<ShowSeat>
+- payments: List<Payment>
+
+enum TicketStatus
+CONFIRMED, AWAITING_ACTION, CANCELLED
+
+Payment
+- id: Long
+- referenceNumber: Long
+- amountPaid: Double
+- transactionStartTime: Timestamp
+- transactionResponseTime: Timestamp
+- status: String
+- message: String
