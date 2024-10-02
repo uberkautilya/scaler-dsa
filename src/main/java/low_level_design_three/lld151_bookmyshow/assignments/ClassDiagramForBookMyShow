@@ -11,3 +11,102 @@ Design a class diagram for BookMyShow Requirements:
 9. Movies, shows and screens will support features like 2D, 3D, DOLBY_IMAX, DOLBY_VISION etc.
 10. We integrate with Razorpay to handle payments.
 11. Users should be able to book multiple seats for a show via the app by paying for them at the time of booking.
+
+
+Instructions
+A learner is expected to mention the following in the solution:
+Identify Key Entities and Their Relationships
+Define Attributes and Methods for Each Class
+Establish Access Modifiers and Visibility
+Define relevant Design Patterns.
+Ensure Consistency and Completeness
+
+
+Example
+
+System requirements:
+There should be two players in the game: 'X' and 'O'.
+The board should have 3x3 cells.
+Players take alternate turns to place their marks on the board.
+A player can place their mark only on an unoccupied cell.
+The game should be able to identify and announce thewinner (if there is one) or if the game is a draw.
+The game should be able to display the current state of the board.
+The game should have the ability to reset the board for a new game.
+There should be methods to validate the move.
+The game should maintain the history of moves.
+Players should be able to query the game's rules.
+
+class Game {
+  attributes:
+    players: Player[2]
+    currentPlayer: Player
+    board: Board
+    moveHistory: List<Move>
+    isGameOver: Boolean
+    winner: Player
+
+  methods:
+    startNewGame(): void
+    makeMove(position: Position): Boolean
+    checkWinner(): Player
+    checkDraw(): Boolean
+    switchPlayer(): void
+    getCurrentState(): String
+    resetBoard(): void
+    validateMove(position: Position): Boolean
+    getGameRules(): String
+}
+
+
+class Player {
+  attributes:
+    name: String
+    mark: Char  // 'X' or 'O'
+
+  methods:
+    makeMove(position: Position, board: Board): Boolean
+}
+
+
+class Board {
+  attributes:
+    cells: Cell[3][3]
+
+  methods:
+    placeMark(mark: Char, position: Position): Boolean
+    hasWinningLine(mark: Char): Boolean
+    isFull(): Boolean
+    display(): String
+    clear(): void
+}
+
+
+class Cell {
+  attributes:
+    mark: Char  // 'X', 'O', or null
+
+  methods:
+    isOccupied(): Boolean
+    setMark(mark: Char): void
+}
+
+
+class Move {
+  attributes:
+    player: Player
+    position: Position
+
+  methods:
+    getPlayer(): Player
+    getPosition(): Position
+}
+
+
+class Position {
+  attributes:
+    row: Integer
+    column: Integer
+
+  methods:
+    equals(other: Position): Boolean
+}
