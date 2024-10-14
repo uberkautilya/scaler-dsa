@@ -1,27 +1,50 @@
 package advanced.module5.dsa56_oct18;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class IsomorphicStrings {
+    private static final int BIG_PRIME = 1000_000_007;
+    private static final int PRIME = 29;
+
     public static void main(String[] args) {
         IsomorphicStrings isomorphicStrings = new IsomorphicStrings();
-        int result = isomorphicStrings.solve("cvv", "xyx"); //Expected: 0
+        int result = isomorphicStrings.solve("aba", "xxx"); //Expected: 0
         System.out.println("result = " + result);
 
     }
 
+    //AABCDE ... DDGERW
     public int solve(String A, String B) {
-        Set<Character> aSet = new HashSet<>();
-        Set<Character> bSet = new HashSet<>();
-        for (Character a : A.toCharArray()) {
-            aSet.add(a);
+        Map<Character, Integer> aCountMap = new HashMap<>();
+        Map<Character, Integer> bCountMap = new HashMap<>();
+        int aHash = 0;
+        int bHash = 0;
+        int f = 1;
+        int b = 1;
+        for (Character c : A.toCharArray()) {
+            int charCount;
+            if (!aCountMap.containsKey(c)) {
+                aCountMap.put(c, f++);
+            }
+            charCount = aCountMap.get(c);
+            aHash = aHash * PRIME + charCount;
+            aHash %= BIG_PRIME;
         }
-        for (Character b : B.toCharArray()) {
-            bSet.add(b);
+        for (Character c : B.toCharArray()) {
+            int charCount;
+            if(!bCountMap.containsKey(c)) {
+                bCountMap.put(c, b++);
+            }
+            charCount = bCountMap.get(c);
+            bHash = bHash * PRIME + charCount;
+            bHash %= BIG_PRIME;
         }
-        aSet.removeAll(bSet);
-        bSet.removeAll(aSet);
-        return aSet.size() == bSet.size() ? 1 : 0;
+        if(aHash == bHash) {
+            return 1;
+        }
+        return 0;
     }
 }
