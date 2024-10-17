@@ -10,24 +10,27 @@ public class DungeonPrincess {
             Arrays.fill(a, -1);
         }
 
-        int minHealthRequired = minHealth(0, 0, health, dp);
-        System.out.println("minHealthRequired = " + minHealthRequired);
+        int minHealthRequiredToReachTargetCell = minHealth(0, 0, health, dp);
+        System.out.println("minHealthRequiredToReachTargetCell = " + minHealthRequiredToReachTargetCell);
     }
-    static int minHealth(int row, int col, int[][] health, int[][] dp) {
+    static int minHealth(int startRow, int startCol, int[][] health, int[][] dp) {
         int N = health.length;
         int M = health[0].length;
-        if (row >= N || col >= M) {
+        //Out of bounds from the matrix
+        if (startRow >= N || startCol >= M) {
             return Integer.MAX_VALUE;
         }
-        if (row == N - 1 && col == M - 1) {
-            return Math.max(1, 1 - health[N - 1][M - 1]);
+        int healthImpact = health[startRow][startCol];
+        //Target cell reached
+        if (startRow == N - 1 && startCol == M - 1) {
+            return Math.max(1, 1 - healthImpact);
         }
-        if (dp[row][col] == -1) {
-            int a = minHealth(row, col + 1, health, dp);
-            int b = minHealth(row + 1, col, health, dp);
-            int minHealthToReachCellEntry = Math.min(a, b);
-            dp[row][col] = Math.max(1, minHealthToReachCellEntry);
+        if (dp[startRow][startCol] == -1) {
+            int a = minHealth(startRow, startCol + 1, health, dp);
+            int b = minHealth(startRow + 1, startCol, health, dp);
+            int minHealthToReachTarget = Math.min(a, b);
+            dp[startRow][startCol] = Math.max(1, minHealthToReachTarget - healthImpact);
         }
-        return dp[row][col];
+        return dp[startRow][startCol];
     }
 }
