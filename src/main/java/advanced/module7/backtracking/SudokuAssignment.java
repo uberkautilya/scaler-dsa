@@ -20,41 +20,45 @@ public class SudokuAssignment {
     }
 
     public void solveSudoku(char[][] A) {
-        char[][] ans = new char[9][9];
-        sudoku(A, 0, ans);
+        char[][] solutionMatrix = new char[9][9];
+        sudoku(A, 0, solutionMatrix);
+
+        //Copy the solution matrix formed into the original matrix.
         for (int i = 0; i < A.length; i++) {
             for (int j = 0; j < A[i].length; j++) {
-                A[i][j] = ans[i][j];
+                A[i][j] = solutionMatrix[i][j];
             }
         }
     }
 
-    void sudoku(char[][] mat, int i, char[][] ans) {
-        //If the last cell's ith value is exceeded, this implies all cells are filled successfully
-        if (i == 81) {
-            for (int j = 0; j < mat.length; j++) {
-                for (int k = 0; k < mat[j].length; k++) {
-                    ans[j][k] = mat[j][k];
+    void sudoku(char[][] mat, int index, char[][] solutionMatrix) {
+        //Base condition: If the last cell is filled, solution is identified
+        if (index == 81) {
+
+            //Assign the mat values as the solution identified.
+            for (int row = 0; row < mat.length; row++) {
+                for (int col = 0; col < mat[row].length; col++) {
+                    solutionMatrix[row][col] = mat[row][col];
                 }
             }
             return;
         }
-        //Using i, find the row and column
-        int row = i / 9;
-        int column = i % 9;
-        if (mat[row][column] != '.') {
-            //Data already present in the cell. Move to the next cell
-            sudoku(mat, i + 1, ans);
+        //Using index, find the row and col
+        int row = index / 9;
+        int col = index % 9;
+        if (mat[row][col] != '.') {
+            //Represents a cell already filled from the question. Move to the next cell
+            sudoku(mat, index + 1, solutionMatrix);
         } else {
             //Fill a value in the current cell and recurse to next cell
-            for (char val = '1'; val <= '9'; val++) {
-                if (isValid(mat, row, column, val)) {
+            for (char value = '1'; value <= '9'; value++) {
+                if (isValid(mat, row, col, value)) {
                     //Explore the solution with each value, see if it can reach the end point
-                    mat[row][column] = val;
-                    //Recurse with the next cell
-                    sudoku(mat, i + 1, ans);
-                    //Backtrack, if the above lead to a dead end - couldn't fill all values
-                    mat[row][column] = '.';
+                    mat[row][col] = value;
+                    sudoku(mat, index + 1, solutionMatrix);
+
+                    //Backtrack, if the above resulted in a dead end - couldn't fill all values
+                    mat[row][col] = '.';
                 }
             }
         }
@@ -62,64 +66,58 @@ public class SudokuAssignment {
 
     boolean isValid(char[][] mat, int row, int column, char val) {
         HashMap<Integer, HashSet<Character>> valueMap = new HashMap<>();
+
         for (int r = 0; r < mat.length; r++) {
             for (int c = 0; c < mat[r].length; c++) {
+                if (mat[r][c] == '.') {
+                    continue;
+                }
                 //Holds all elements in the row r
+                valueMap.putIfAbsent(r, new HashSet<>());
                 HashSet<Character> values = valueMap.get(r);
-                if (values != null) {
-                    values.add(mat[r][c]);
-                } else {
-                    HashSet<Character> set = new HashSet<>();
-                    set.add(mat[r][c]);
-                    valueMap.put(r, set);
-                }
+                values.add(mat[r][c]);
+
                 //Holds all elements in the column c
+                valueMap.putIfAbsent(9 + c, new HashSet<>());
                 HashSet<Character> colVals = valueMap.get(9 + c);
-                if (colVals != null) {
-                    colVals.add(mat[r][c]);
-                } else {
-                    HashSet<Character> set = new HashSet<>();
-                    set.add(mat[r][c]);
-                    valueMap.put(9 + c, set);
-                }
+                colVals.add(mat[r][c]);
+
                 //Holds all elements in the miniMatrix
-                int miniCount = getMiniCount(r, c);
+                int miniCount = getMiniSquareCount(r, c);
+                valueMap.putIfAbsent(18 + miniCount, new HashSet<>());
                 HashSet<Character> miniVals = valueMap.get(18 + miniCount);
-                if (miniVals != null) {
-                    miniVals.add(mat[r][c]);
-                } else {
-                    HashSet<Character> set = new HashSet<>();
-                    set.add(mat[r][c]);
-                    valueMap.put(18 + miniCount, set);
-                }
+                miniVals.add(mat[r][c]);
             }
         }
-        int miniCount = getMiniCount(row, column);
+        int miniCount = getMiniSquareCount(row, column);
         return !valueMap.get(row).contains(val) &&
                 !valueMap.get(9 + column).contains(val) &&
                 !valueMap.get(18 + miniCount).contains(val);
     }
 
 
-    int getMiniCount(int r, int c) {
+    int getMiniSquareCount(int row, int col) {
         int miniCount = Integer.MIN_VALUE;
-        if (r / 3 == 2 && c / 3 == 2) {
+        int rowIndex = row / 3;
+        int columnIndex = col / 3;
+
+        if (rowIndex == 2 && columnIndex == 2) {
             miniCount = 8;
-        } else if (r / 3 == 2 && c / 3 == 1) {
+        } else if (rowIndex == 2 && columnIndex == 1) {
             miniCount = 7;
-        } else if (r / 3 == 2 && c / 3 == 0) {
+        } else if (rowIndex == 2 && columnIndex == 0) {
             miniCount = 6;
-        } else if (r / 3 == 1 && c / 3 == 2) {
+        } else if (rowIndex == 1 && columnIndex == 2) {
             miniCount = 5;
-        } else if (r / 3 == 1 && c / 3 == 1) {
+        } else if (rowIndex == 1 && columnIndex == 1) {
             miniCount = 4;
-        } else if (r / 3 == 1 && c / 3 == 0) {
+        } else if (rowIndex == 1 && columnIndex == 0) {
             miniCount = 3;
-        } else if (r / 3 == 0 && c / 3 == 2) {
+        } else if (rowIndex == 0 && columnIndex == 2) {
             miniCount = 2;
-        } else if (r / 3 == 0 && c / 3 == 1) {
+        } else if (rowIndex == 0 && columnIndex == 1) {
             miniCount = 1;
-        } else if (r / 3 == 0 && c / 3 == 0) {
+        } else if (rowIndex == 0 && columnIndex == 0) {
             miniCount = 0;
         }
         return miniCount;
