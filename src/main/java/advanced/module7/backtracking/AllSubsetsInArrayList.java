@@ -10,13 +10,12 @@ public class AllSubsetsInArrayList {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, -20, -11, -8, -4, 2, -12, 14, 1, -18));
         ArrayList<ArrayList<Integer>> subsets = subsets(list);
 
-        System.out.println(subsets);
+        subsets.forEach(System.out::println);
     }
 
     public static ArrayList<ArrayList<Integer>> subsets(ArrayList<Integer> A) {
 
         ArrayList<ArrayList<Integer>> result = new ArrayList<>();
-        Collections.sort(A);
         addSubsets(A, 0, new ArrayList<>(), result);
 
         result.sort((a1, a2) -> {
@@ -34,22 +33,26 @@ public class AllSubsetsInArrayList {
             return Integer.compare(a1.size(), a2.size());
         });
 
+        System.out.println("The number of subarrays: " + result.size());
         return result;
     }
 
-    private static void addSubsets(ArrayList<Integer> sorted, int index,
-                                   ArrayList<Integer> currentArray, ArrayList<ArrayList<Integer>> result) {
-        ArrayList<Integer> currentArrayList = new ArrayList<>(currentArray);
-        if (index >= sorted.size()) {
-            result.add(currentArrayList);
+    private static void addSubsets(final ArrayList<Integer> sortedElements, int index,
+                                   ArrayList<Integer> currentArray,
+                                   ArrayList<ArrayList<Integer>> result) {
+        ArrayList<Integer> arrayListUnderConstruction = new ArrayList<>(currentArray);
+
+        //Base condition: No more elements in the original array to chose from
+        if (index >= sortedElements.size()) {
+            result.add(arrayListUnderConstruction);
             return;
         }
 
         //Choice 1: Not choosing the current element
-        addSubsets(sorted, index + 1, currentArrayList, result);
+        addSubsets(sortedElements, index + 1, arrayListUnderConstruction, result);
 
         //Choice 2: Choose the current element
-        currentArrayList.add(sorted.get(index));
-        addSubsets(sorted, index + 1, currentArrayList, result);
+        arrayListUnderConstruction.add(sortedElements.get(index));
+        addSubsets(sortedElements, index + 1, arrayListUnderConstruction, result);
     }
 }
